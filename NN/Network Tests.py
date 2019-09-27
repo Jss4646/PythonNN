@@ -1,9 +1,5 @@
 import unittest
-from Network import Neuron
-
-
-def multiply(a, b):
-    return a * b
+from Network import Neuron, sigmoid, relu
 
 
 class NeuronTesting(unittest.TestCase):
@@ -12,6 +8,14 @@ class NeuronTesting(unittest.TestCase):
 
     def add_neuron(self, neuron_input, neuron_activation):
         self.test_neurons.append(Neuron(len(neuron_input), neuron_activation))
+
+    def test_sigmoid(self):
+        self.assertAlmostEqual(sigmoid(1), 0.731058, 5)
+        self.assertAlmostEqual(sigmoid(1, True), 0.1966119, 5)
+
+    def test_relu(self):
+        self.assertAlmostEqual(relu(1), 1)
+        self.assertAlmostEqual(relu(0, True), 0)
 
     def test_neuron_init(self):
         with self.assertRaises(ValueError):

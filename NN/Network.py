@@ -3,11 +3,17 @@ from typing import List, Any
 import numpy as np
 
 
-def sigmoid(x) -> float:
-    return 1 / (1 + np.exp(-x))
+def sigmoid(x, derivative=False) -> float:
+    sigm = 1 / (1 + np.exp(-x))
+    if derivative:
+        return sigm * (1 - sigm)
+    return sigm
 
 
-def relu(x) -> float:
+def relu(x, derivative=False) -> float:
+    if derivative:
+        x = 0 if x < 0 else 1
+        return x
     return np.maximum(x, 0)
 
 
@@ -17,7 +23,7 @@ class Neuron:
 
     Parameters
     ----------
-    num_of_inputs : int
+    num_of_inputs : int, optional
         Inputs from either the source image or a previous layer
 
     activation_function : str
@@ -25,6 +31,11 @@ class Neuron:
         Supported activation types:
             -Sigmoid
             -ReLU
+
+    Methods
+    ------
+    run(inputs=[0.12, 0.24])
+        Executes the neurons function
 
     Examples
     --------
@@ -36,9 +47,13 @@ class Neuron:
     ----------
         See : http://neuralnetworksanddeeplearning.com/chap1.html#sigmoid_neurons
               for the maths behind a Neuron
+
+        See : https://cs231n.github.io/neural-networks-2/#init
+            For network setup best practices
     """
+
     def __init__(self, num_of_inputs: int, activation_function='sigmoid'):
-        self.weights = np.random.standard_normal(num_of_inputs)
+        self.weights = 0.1 * np.random.standard_normal(num_of_inputs)
         self.bias = np.random.randint(-1, 1)
         self.output = 0
 
@@ -69,19 +84,43 @@ class Neuron:
             The output of the neuron once it has been passed through
             the neuron's
         """
-        for inp, weight in zip(inputs, self.weights):
-            self.output += inp * weight
-
+        self.output = np.dot(inputs, self.weights)
         self.output += self.bias
         self.output = self.activation_function(self.output)
         return self.output
 
 
 class Network:
-    # TODO add documentation
-    def __init__(self, data_set: list, layers: dict) -> None:
+    """
+    A basic neural network
 
+    Parameters
+    ----------
+    data_set : list
+        EG: The MNIST dataset
+    layers : dict
+        Tells the network how to setup the layers
+        In the form:
+        layers = {
+            'layer 1': {
+                'activation': 'relu',
+                'neurons': 10,
+            },
+            ...
+        }
+
+    Methods
+    ------
+    forward_prop
+        forward propagation function
+
+    back_prop
+        back propagation function
+    """
+
+    def __init__(self, data_set: list, labels: list, layers: dict):
         self.layers = []
+        self.labels = labels
         self.data_set = data_set
 
         for index, layer in enumerate(layers.values()):
@@ -89,18 +128,61 @@ class Network:
             num_of_neurons = layer['neurons']
 
             if index == 0:
-                self.layers.append([Neuron(len(data_set), activation) for num in range(num_of_neurons)])
+                self.layers.append([Neuron(len(data_set[0]), activation) for num in range(num_of_neurons)])
             else:
                 self.layers.append([Neuron(prev_num_of_neurons, activation) for num in range(num_of_neurons)])
 
             prev_num_of_neurons = num_of_neurons
 
+    def forward_prop(self, data):
+        """
+        Passes input data through the network
 
-data_set = [0.2]
+        Parameters
+        ----------
+        data : list
+            Your input data
+        """
+        layers = self.layers.copy()
+
+        def feed_forward(input_arr):
+            if len(layers) > 0:
+                neuron_outputs = [neuron.run(input_arr) for neuron in layers[0]]
+                del layers[0]
+                feed_forward(neuron_outputs)
+
+        feed_forward(data)
+
+    def back_prop(self, label):
+
+        output = list(map(lambda x: x.output, self.layers[-1]))
+        print(f'Output: {output}')
+        print(f'Desired: {label}')
+
+        # Only really matters for output layer. Need to make new one for hidden layers
+        def cost_function(layer_outputs, desired_outputs):
+            cost_output = map(
+                lambda a, b: (a - b) ** 2,
+                layer_outputs, desired_outputs
+            )
+            cost_output = np.fromiter(cost_output, dtype=np.float)
+            return cost_output.sum()
+
+        def cost_prime_function(layer_outputs, desired_outputs):
+            return np.subtract(layer_outputs, desired_outputs).sum()
+
+
+
+
+
+
+
+
+data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
 
 layers = {
     'layer 1': {
-        'activation': 'relu',
+        'activation': 'sigmoid',
         'neurons': 10,
     },
     'layer 2': {
@@ -113,6 +195,23 @@ layers = {
     },
 }
 
-network = Network(data_set, layers)
-print(network.layers)
-print(network.layers[0][0])
+labels = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+network = Network(data_set, labels, layers)
+network.forward_prop(data_set[0])
+network.back_prop(labels[0])
+
+with open('network.txt', 'w') as network_file:
+    np.set_printoptions(precision=4, linewidth=1000)
+    for layer_index, layer in enumerate(network.layers):
+        network_file.write(f'Layer {layer_index}:')
+        for neuron_index, neuron in enumerate(layer):
+            network_file.write(f'\n\tNeuron {neuron_index}:'
+                               f'\n\t\tWeights:'
+                               f'\n\t\t\t{neuron.weights}'
+                               f'\n\t\tOutput: {neuron.output}')
+        network_file.write('\n')
+
+    network_file.write('\nNetwork output:')
+
+
