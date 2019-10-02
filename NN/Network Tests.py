@@ -1,10 +1,11 @@
 import unittest
-from Network import Neuron, sigmoid, relu
+from Network import Neuron, sigmoid, relu, Network, labels, data_set, layers
 
-
+# TODO add more print statements
 class NeuronTesting(unittest.TestCase):
     def setUp(self) -> None:
         self.test_neurons = []
+        self.network = Network(data_set, labels, layers)
 
     def add_neuron(self, neuron_input, neuron_activation):
         self.test_neurons.append(Neuron(len(neuron_input), neuron_activation))
@@ -15,7 +16,7 @@ class NeuronTesting(unittest.TestCase):
 
     def test_relu(self):
         self.assertAlmostEqual(relu(1), 1)
-        self.assertAlmostEqual(relu(0, True), 0)
+        self.assertAlmostEqual(relu(0, True), 1)
 
     def test_neuron_init(self):
         with self.assertRaises(ValueError):
@@ -33,6 +34,12 @@ class NeuronTesting(unittest.TestCase):
             print(f"Neuron output: {test_neuron.output}")
             print(f"Neuron type: {type(test_neuron.output)}")
             self.assertNotEqual(test_neuron.output, 0)
+
+    def test_network_backprop(self):
+        before_backprop = self.network.layers[0][0].weights[0]
+        self.network.back_prop(labels[0])
+        after_backprop = self.network.layers[0][0].weights[0]
+        self.assertNotEqual(before_backprop, after_backprop)
 
 
 # TODO add tests for network

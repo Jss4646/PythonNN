@@ -153,39 +153,23 @@ class Network:
 
         feed_forward(data)
 
-    def back_prop(self, label):
-
-        # Take the cost of each node of the output layer and pass it back
+    def back_prop(self, labels: list):
         output_layer = self.layers[-1]
         hidden_layers = self.layers[0:-1]
         hidden_layers.reverse()
 
-        output = list(map(lambda x: x.output, output_layer))
-        print(f'Output: {output}')
-        print(f'Desired: {label}')
+        for label, output_neuron in zip(labels, output_layer):
 
-        print(f"before: {self.layers[0][0].weights[0]}")
-
-        for output_index, output_neuron in enumerate(output_layer):
-
-            output_cost = (label[output_index] - output_neuron.output) ** 2
-            output_neuron.weights = list(map(lambda x: x * output_cost, output_neuron.weights))
+            output_cost = (label - output_neuron.output) ** 2
+            output_neuron.weights += output_cost
 
             for hidden_layer in hidden_layers:
-                for hidden_index, hidden_neuron in enumerate(hidden_layer):
+                for hidden_neuron in hidden_layer:
 
-                    hidden_cost = (label[hidden_index] - hidden_neuron.output) ** 2
-                    output_neuron.weights = list(map(lambda x: x * hidden_cost, output_neuron.weights))
+                    hidden_cost = (label - hidden_neuron.output) ** 2
+                    hidden_neuron.weights += hidden_cost
 
         hidden_layers.reverse()
-        print(f"after: {self.layers[0][0].weights[0]}")
-
-
-
-
-
-
-
 
 
 data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
@@ -225,10 +209,6 @@ def output_to_file(name):
 
 network = Network(data_set, labels, layers)
 network.forward_prop(data_set[0])
-output_to_file('forward')
-print(network.layers[0][0].weights[0])
-network.back_prop(labels[0])
-output_to_file('backward')
-print(network.layers[0][0].weights[0])
+output_to_file('network.txt')
 
 
