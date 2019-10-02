@@ -155,21 +155,31 @@ class Network:
 
     def back_prop(self, label):
 
-        output = list(map(lambda x: x.output, self.layers[-1]))
+        # Take the cost of each node of the output layer and pass it back
+        output_layer = self.layers[-1]
+        hidden_layers = self.layers[0:-1]
+        hidden_layers.reverse()
+
+        output = list(map(lambda x: x.output, output_layer))
         print(f'Output: {output}')
         print(f'Desired: {label}')
 
-        # Only really matters for output layer. Need to make new one for hidden layers
-        def cost_function(layer_outputs, desired_outputs):
-            cost_output = map(
-                lambda a, b: (a - b) ** 2,
-                layer_outputs, desired_outputs
-            )
-            cost_output = np.fromiter(cost_output, dtype=np.float)
-            return cost_output.sum()
+        print(f"before: {self.layers[0][0].weights[0]}")
 
-        def cost_prime_function(layer_outputs, desired_outputs):
-            return np.subtract(layer_outputs, desired_outputs).sum()
+        for output_index, output_neuron in enumerate(output_layer):
+
+            output_cost = (label[output_index] - output_neuron.output) ** 2
+            output_neuron.weights = list(map(lambda x: x * output_cost, output_neuron.weights))
+
+            for hidden_layer in hidden_layers:
+                for hidden_index, hidden_neuron in enumerate(hidden_layer):
+
+                    hidden_cost = (label[hidden_index] - hidden_neuron.output) ** 2
+                    output_neuron.weights = list(map(lambda x: x * hidden_cost, output_neuron.weights))
+
+        hidden_layers.reverse()
+        print(f"after: {self.layers[0][0].weights[0]}")
+
 
 
 
@@ -197,21 +207,28 @@ layers = {
 
 labels = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
+
+def output_to_file(name):
+    with open(name, 'w') as network_file:
+        np.set_printoptions(precision=4, linewidth=1000)
+        for layer_index, layer in enumerate(network.layers):
+            network_file.write(f'Layer {layer_index}:')
+            for neuron_index, neuron in enumerate(layer):
+                network_file.write(f'\n\tNeuron {neuron_index}:'
+                                   f'\n\t\tWeights:'
+                                   f'\n\t\t\t{neuron.weights}'
+                                   f'\n\t\tOutput: {neuron.output}')
+            network_file.write('\n')
+
+        network_file.write('\nNetwork output:')
+
+
 network = Network(data_set, labels, layers)
 network.forward_prop(data_set[0])
+output_to_file('forward')
+print(network.layers[0][0].weights[0])
 network.back_prop(labels[0])
-
-with open('network.txt', 'w') as network_file:
-    np.set_printoptions(precision=4, linewidth=1000)
-    for layer_index, layer in enumerate(network.layers):
-        network_file.write(f'Layer {layer_index}:')
-        for neuron_index, neuron in enumerate(layer):
-            network_file.write(f'\n\tNeuron {neuron_index}:'
-                               f'\n\t\tWeights:'
-                               f'\n\t\t\t{neuron.weights}'
-                               f'\n\t\tOutput: {neuron.output}')
-        network_file.write('\n')
-
-    network_file.write('\nNetwork output:')
+output_to_file('backward')
+print(network.layers[0][0].weights[0])
 
 
