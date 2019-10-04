@@ -122,6 +122,7 @@ class Network:
         self.layers = []
         self.labels = labels
         self.data_set = data_set
+        self.learning_rate = 1
 
         for index, layer in enumerate(layers.values()):
             activation = layer['activation']
@@ -153,23 +154,32 @@ class Network:
 
         feed_forward(data)
 
-    def back_prop(self, labels: list):
+    def back_prop(self, labels: list, learning_rate=0.1):
+        self.learning_rate = learning_rate
         output_layer = self.layers[-1]
         hidden_layers = self.layers[0:-1]
         hidden_layers.reverse()
 
         for label, output_neuron in zip(labels, output_layer):
 
-            output_cost = (label - output_neuron.output) ** 2
-            output_neuron.weights += output_cost
+            output_cost = 0.5 * (output_neuron.output - label) ** 2
+            output_neuron.weights += output_cost * learning_rate
 
             for hidden_layer in hidden_layers:
                 for hidden_neuron in hidden_layer:
 
-                    hidden_cost = (label - hidden_neuron.output) ** 2
-                    hidden_neuron.weights += hidden_cost
+                    hidden_cost = 0.5 * (hidden_neuron.output - label) ** 2
+                    hidden_neuron.weights += hidden_cost * learning_rate
 
         hidden_layers.reverse()
+
+    def train(self, epochs=1):
+        for i in range(epochs):
+            print(f"\nEpoch {i + 1}")
+            for j in range(len(self.data_set)):
+                print(f"\tData {j + 1}")
+                self.forward_prop(self.data_set[j])
+                self.back_prop(self.labels[j])
 
 
 data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
@@ -189,7 +199,7 @@ layers = {
     },
 }
 
-labels = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+labels = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 
 def output_to_file(name):
@@ -208,7 +218,9 @@ def output_to_file(name):
 
 
 network = Network(data_set, labels, layers)
-network.forward_prop(data_set[0])
+network.train(100)
+for i in network.layers[-1]:
+    print(f"Output: {i.output}")
 output_to_file('network.txt')
 
 
