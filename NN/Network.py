@@ -129,9 +129,9 @@ class Network:
             num_of_neurons = layer['neurons']
 
             if index == 0:
-                self.layers.append([Neuron(len(data_set[0]), activation) for num in range(num_of_neurons)])
+                self.layers.append([Neuron(len(data_set[0]), activation) for i in range(num_of_neurons)])
             else:
-                self.layers.append([Neuron(prev_num_of_neurons, activation) for num in range(num_of_neurons)])
+                self.layers.append([Neuron(prev_num_of_neurons, activation) for i in range(num_of_neurons)])
 
             prev_num_of_neurons = num_of_neurons
 
@@ -154,21 +154,23 @@ class Network:
 
         feed_forward(data)
 
-    def back_prop(self, labels: list, learning_rate=0.1):
+    def back_prop(self, labels: list, learning_rate=2):
         self.learning_rate = learning_rate
         output_layer = self.layers[-1]
         hidden_layers = self.layers[0:-1]
         hidden_layers.reverse()
 
+        output_activations = np.fromiter((i.output for i in output_layer), dtype=np.float)
+        output_cost = np.square(labels - output_activations).mean()
+
         for label, output_neuron in zip(labels, output_layer):
 
-            output_cost = 0.5 * (output_neuron.output - label) ** 2
             output_neuron.weights += output_cost * learning_rate
 
             for hidden_layer in hidden_layers:
                 for hidden_neuron in hidden_layer:
 
-                    hidden_cost = 0.5 * (hidden_neuron.output - label) ** 2
+                    hidden_cost = 0.5 * (label - hidden_neuron.output) ** 2
                     hidden_neuron.weights += hidden_cost * learning_rate
 
         hidden_layers.reverse()
