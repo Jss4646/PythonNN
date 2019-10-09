@@ -56,6 +56,7 @@ class Neuron:
         self.weights = 0.1 * np.random.standard_normal(num_of_inputs)
         self.bias = np.random.randint(-1, 1)
         self.output = 0
+        self.error = 1
 
         if activation_function.lower() == 'sigmoid':
             self.activation_function = sigmoid
@@ -162,14 +163,18 @@ class Network:
 
         for label, output_neuron in zip(labels, output_layer):
 
-            output_cost = 0.5 * (output_neuron.output - label) ** 2
-            output_neuron.weights += output_cost * learning_rate
+            output = output_neuron.output
+            error = (label - output) * output_neuron.activation_function(output, True)
 
-            for hidden_layer in hidden_layers:
+            output_neuron.error = error
+            output_neuron.weights += learning_rate * error *
+
+            for index, hidden_layer in enumerate(hidden_layers):
                 for hidden_neuron in hidden_layer:
 
-                    hidden_cost = 0.5 * (hidden_neuron.output - label) ** 2
-                    hidden_neuron.weights += hidden_cost * learning_rate
+                    hidden_output = hidden_neuron.output
+                    hidden_neuron.error = (output_neuron.weights[index] * output_neuron.output) * \
+                                          hidden_neuron.activation_function(hidden_output, True)
 
         hidden_layers.reverse()
 
