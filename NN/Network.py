@@ -56,7 +56,7 @@ class Neuron:
         self.weights = 0.1 * np.random.standard_normal(num_of_inputs)
         self.bias = np.random.randint(-1, 1)
         self.output = 0
-        self.error = 1
+        self.output_no_activation = 0
 
         if activation_function.lower() == 'sigmoid':
             self.activation_function = sigmoid
@@ -85,9 +85,8 @@ class Neuron:
             The output of the neuron once it has been passed through
             the neuron's
         """
-        self.output = np.dot(inputs, self.weights)
-        self.output += self.bias
-        self.output = self.activation_function(self.output)
+        self.output_no_activation = np.dot(inputs, self.weights) + self.bias
+        self.output = self.activation_function(self.output_no_activation)
         return self.output
 
 
@@ -130,9 +129,9 @@ class Network:
             num_of_neurons = layer['neurons']
 
             if index == 0:
-                self.layers.append([Neuron(len(data_set[0]), activation) for num in range(num_of_neurons)])
+                self.layers.append([Neuron(len(data_set[0]), activation) for i in range(num_of_neurons)])
             else:
-                self.layers.append([Neuron(prev_num_of_neurons, activation) for num in range(num_of_neurons)])
+                self.layers.append([Neuron(prev_num_of_neurons, activation) for i in range(num_of_neurons)])
 
             prev_num_of_neurons = num_of_neurons
 
@@ -155,28 +154,56 @@ class Network:
 
         feed_forward(data)
 
-    def back_prop(self, labels: list, learning_rate=0.1):
+    def back_prop(self, labels: list, learning_rate=2):
         self.learning_rate = learning_rate
-        output_layer = self.layers[-1]
-        hidden_layers = self.layers[0:-1]
-        hidden_layers.reverse()
+        labels = np.asarray(labels)
 
-        for label, output_neuron in zip(labels, output_layer):
+        # ol = output layer
+        ol = self.layers[-1]
+        ol_activations = [neuron.output for neuron in ol]
+        ol_no_activations = np.asarray([neuron.output_no_activation for neuron in ol])
 
-            output = output_neuron.output
-            error = (label - output) * output_neuron.activation_function(output, True)
+        # hl = hidden layer
+        hl = self.layers[0:-1]
+        hl.reverse()
 
-            output_neuron.error = error
-            output_neuron.weights += learning_rate * error *
+        # output_activations = np.fromiter((i.output for i in output_layer), dtype=np.float)
+        # output_cost = np.square(labels - output_activations).mean()
+        #
+        # for label, output_neuron in zip(labels, output_layer):
+        #
+        #     output_neuron.weights += output_cost * learning_rate
+        #
+        #     for hidden_layer in hidden_layers:
+        #         for hidden_neuron in hidden_layer:
+        #
+        #             hidden_cost = 0.5 * (label - hidden_neuron.output) ** 2
+        #             hidden_neuron.weights += hidden_cost * learning_rate
 
-            for index, hidden_layer in enumerate(hidden_layers):
+        # ol_delta = (labels - ol_activations) * sigmoid(ol_no_activations, True)
+        # for neuron in ol:
+        #     for weight in neuron.weights:
+        #         weight += ol_delta * learning_rate
+        #
+        # for layer in hl:
+        #     layer_weights = np.asarray([neuron.weights for neuron in layer])
+        #     hl_delta = np.dot(layer_weights, ol_delta) * sigmoid(ol_no_activations, True)
+        #     for neuron in layer:
+        #         neuron.weights += hl_delta * learning_rate
+
+        ol_delta = (labels - ol_activations) * sigmoid(ol_no_activations, True)
+        for label, output_neuron, delta in zip(labels, ol, ol_delta):
+
+            output_neuron.weights -= delta * learning_rate
+
+            for hidden_layer in hl:
                 for hidden_neuron in hidden_layer:
 
-                    hidden_output = hidden_neuron.output
-                    hidden_neuron.error = (output_neuron.weights[index] * output_neuron.output) * \
-                                          hidden_neuron.activation_function(hidden_output, True)
+                    hidden_delta = hidden_neuron.weights * delta
+                    hidden_delta *= sigmoid(hidden_neuron.output_no_activation, True)
+                    hidden_neuron.weights -= hidden_delta
 
-        hidden_layers.reverse()
+        hl.reverse()
 
     def train(self, epochs=1):
         for i in range(epochs):
