@@ -1,0 +1,392 @@
+
+body {
+    background: #FCFAF7;
+    font-family: Bungee;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+.header {
+    height: 70px;
+
+
+    background: #31393C;
+}
+
+.header-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 64px;
+    align-items: center;
+    text-align: center;
+    margin-top: 0;
+
+    color: #FCFAF7;
+}
+
+.NN-Viewport {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    overflow: auto;
+
+    height: 534px;
+    width: auto;
+    margin: 20px;
+
+    background: #558C8C;
+    border-radius: 27px;
+}
+
+.viewport-controls {
+    background: #31393C;
+    width: 288px;
+    height: 100%;
+    position: relative;
+    margin-right: 15px;
+
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+.viewport-controls h2 {
+    color: #FCFAF7;
+}
+
+.NN-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: #384950;
+    width: 254px;
+    height: 424px;
+    border-radius: 27px;
+    overflow-y: auto;
+}
+
+.NN-controls ol {
+    text-align: center;
+    list-style: none;
+    padding: 0;
+}
+
+.layer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15px;
+    white-space: nowrap;
+}
+
+.layer-text {
+    margin: 0 50px;
+}
+
+.layer-list {
+    color: #FCFAF7;
+    margin: 5px 0;
+}
+
+.node-list {
+    color: #FCFAF7;
+}
+
+.hidden-list {
+    display: none;
+    overflow: hidden;
+}
+
+.node-list * {
+    background: #31393C;
+    margin: 5px 5px;
+    padding: 2px 0;
+    border-radius: 27px;
+}
+
+.add-layer {
+    flex: 0;
+}
+
+.input-layer {
+    flex-shrink: 0;
+    align-self: flex-end;
+    width: 33px;
+    height: 450px;
+    position: absolute;
+    left: 270px;
+    top: 49px;
+
+    background: #31393C;
+    border-radius: 27px;
+
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+
+    color: #FCFAF7;
+}
+
+.input-layer h3 {
+    order: 0;
+    position: absolute;
+    transform: rotate(90deg);
+    left: -35px;
+}
+
+.layer-connections {
+    height: 210px;
+    width: 800px;
+    display: block;
+    position: relative;
+
+}
+
+.connection {
+    position: absolute;
+
+}
+
+.layers {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-around;
+}
+
+.layer {
+    white-space: nowrap;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+    width: 100px;
+}
+
+.layer-nodes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.node {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    width: 90px;
+    height: 90px;
+    background: #EEC643;
+    border-radius: 50%;
+    margin: 5px 0;
+}
+
+.node-selected {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #31393C;
+}
+
+.node-hover {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #6c7679;
+}
+
+.node span {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    align-self: center;
+    pointer-events: none;
+}
+
+.output-layer {
+    flex-shrink: 0;
+    width: 294px;
+    height: 450px;
+    position: relative;
+    margin-left: 20px;
+
+    background: #31393C;
+    border-radius: 27px;
+    font-size: 12px;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 15% 30% 55%;
+    white-space: nowrap;
+
+    color: #FCFAF7;
+}
+
+.output-layer h2 {
+    position: relative;
+    justify-self: center;
+    align-self: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+}
+
+.output-neurons {
+    justify-self: center;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding-bottom: 15px;
+}
+
+.NN-info {
+    justify-self: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.output-layer img {
+    justify-self: center;
+    align-self: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.blob {
+    position: absolute;
+    width: 63px;
+    height: 226px;
+    background: #31393C;
+    border-radius: 27px;
+    z-index: 1;
+
+    left: -20px;
+    top: 115px;
+}
+
+.NN-Controls-Info-Container {
+    height: 100%;
+    width: auto;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+
+    background: #558C8C;
+    border-radius: 27px;
+}
+
+.NN-speed-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: 1 / 2;
+
+    background: #31393C;
+    width: auto;
+    height: 1fr;
+    border-radius: 27px 0 0 27px;
+    color: #FCFAF7;
+}
+
+.play-pause-button {
+    width: 64px;
+    height: 64px;
+    background: #EEC643;
+    border-radius: 50%;
+}
+
+.node-info {
+    grid-column: 2 / 4;
+    width: auto;
+}
+
+.node-info-container {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 15px;
+
+    background: #31393C;
+    color: #FCFAF7;
+    margin: 24px;
+    border-radius: 27px;
+    height: 259px;
+}
+
+.node-info-container * {
+    flex-shrink: 0;
+}
+
+.activation-type {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.activation-type img {
+    width: 200px;
+    height: auto;
+}
+
+.weights {
+    margin: 0 5px;
+}
+
+.bias {
+    margin: 0 5px;
+}
+
+/*wtns - what the node see's*/
+.wtns {
+    flex-shrink: 0;
+}
+
+.node-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #558C8C;
+    border-radius: 27px;
+    width: 266px;
+    height: 120px;
+    margin-top: 40px;
+}
+
+
+.line {
+    stroke-width: 2px;
+    stroke: #31393C;
+}

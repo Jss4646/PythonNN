@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet">
+
+    <title>PNN</title>
+</head>
+<body>
+<div class="header">
+    <h1 class="header-text">Python NN</h1>
+</div>
+
+<!-- Main NN Viewport -->
+<div class="NN-Viewport">
+
+    <!-- controls for the layers and nodes -->
+    <div class="viewport-controls">
+        <h2>Controls</h2>
+        <div class="NN-controls">
+            <ol class="layer-list">
+                <li class="layer-group" id="layer-1">
+                    <div class="layer-bar">
+                        <img class="delete-layer" src="https://via.placeholder.com/20">
+                        <span class="layer-text">Layer 1</span>
+                        <img class="drop-down-button" src="https://via.placeholder.com/20">
+                    </div>
+                    <ol class="node-list">
+                        <li id="l1-node-1">Node 1</li>
+                        <li>Node 2</li>
+                        <li>Node 3</li>
+                        <li>Node 4</li>
+                        <img class="add-node" src="https://via.placeholder.com/20">
+                    </ol>
+                </li>
+                <li class="layer-group" id="layer-2">
+                    <div class="layer-bar">
+                        <img class="delete-layer" src="https://via.placeholder.com/20">
+                        <span class="layer-text">Layer 2</span>
+                        <img class="drop-down-button" src="https://via.placeholder.com/20">
+                    </div>
+                    <ol class="node-list hidden-list">
+                        <li>Node 1</li>
+                        <li>Node 2</li>
+                        <li>Node 3word</li>
+                        <li>Node 4</li>
+                        <img class="add-node" src="https://via.placeholder.com/20">
+                    </ol>
+                </li>
+                <li class="layer-group" id="layer-3">
+                    <div class="layer-bar">
+                        <img class="delete-layer" src="https://via.placeholder.com/20">
+                        <span class="layer-text">Layer 3</span>
+                        <img class="drop-down-button" src="https://via.placeholder.com/20">
+                    </div>
+                    <ol class="node-list">
+                        <li>Node 1</li>
+                        <li>Node 2</li>
+                        <li>Node 3</li>
+                        <li>Node 4</li>
+                        <img class="add-node" src="https://via.placeholder.com/20">
+                    </ol>
+                </li>
+            </ol>
+            <img class="add-layer" src="https://via.placeholder.com/20">
+        </div>
+
+        <!-- Input Layer -->
+        <div class="input-layer">
+            <h3>Input Layer</h3>
+        </div>
+
+    </div>
+
+
+    <!--
+    Generated Layers based on user input
+    Handled by JS:
+    Layers will be added
+    Nodes will be added
+    -->
+    <div class="layers">
+        <div class="layer" id="layer-1-viewport">
+
+            <h2>Layer 1</h2>
+
+            <div class="layer-nodes">
+                <div class="node sigmoid-node no-hover" id="l1-node-1-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l1-node-2-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l1-node-3-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l1-node-4-viewport">
+                    <span>0.012</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="layer" id="layer-2-viewport">
+
+            <h2>Layer 2</h2>
+
+            <div class="layer-nodes">
+                <div class="node sigmoid-node no-hover" id="l2-node-1-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l2-node-2-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l2-node-3-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l2-node-4-viewport">
+                    <span>0.012</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="layer" id="layer-3-viewport">
+
+            <h2>Layer 3</h2>
+
+            <div class="layer-nodes">
+                <div class="node sigmoid-node no-hover" id="l3-node-1-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l3-node-2-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l3-node-3-viewport">
+                    <span>0.012</span>
+                </div>
+                <div class="node sigmoid-node no-hover" id="l3-node-4-viewport">
+                    <span>0.012</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--
+    Output Layer Container
+    Contains:
+        Output Neurons
+        Input image
+        Neural_Network info
+     -->
+    <div class="output-layer">
+
+        <div class="blob"></div>
+
+        <h2>Output Layer</h2>
+
+        <!--
+        Displays the output of the neurons
+        Handled by JS:
+            Changing of output values
+         -->
+        <div class="output-neurons">
+            <li>0: 0.002</li>
+            <li>1: 0.012</li>
+            <li>2: 0.981</li>
+            <li>3: 0.001</li>
+            <li>4: 0.056</li>
+            <li>5: 0.100</li>
+            <li>6: 0.022</li>
+            <li>7: 0.067</li>
+            <li>8: 0.023</li>
+            <li>9: 0.025</li>
+        </div>
+
+        <!--
+        NN info contains:
+            input image
+            NN decision
+            Actual Number
+            % Correct
+            Epochs
+         -->
+
+        <img src="https://via.placeholder.com/125" class="input-image" id="input-image">
+
+        <div class="NN-info">
+
+            <li>Decision</li>
+            <li id="decision">2</li>
+
+            <li>Actual</li>
+            <li id="actual">2</li>
+
+            <li># correct %</li>
+            <li id="%correct">97.2</li>
+
+            <li>Epochs</li>
+            <li id="epochs">78</li>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<!--
+    NN Controls and Node Info; Contains:
+        Speed and start/stop
+        Node info:
+            Node type
+            Weights
+            Bias'
+            What the node see's
+-->
+
+<div class="NN-Controls-Info-Container">
+    <div class="NN-speed-controls">
+        <h2>Neural Network Controls</h2>
+        <h3>Pause</h3>
+        <div class="play-pause-button no-hover">
+
+        </div>
+        <div class="training-speed">
+            <span class="speed-label"></span>
+        </div>
+    </div>
+
+    <div class="node-info">
+        <h2>Please choose a node</h2>
+        <div class="node-info-container">
+            <div class="activation-type">
+                <h4>Activation Type</h4>
+                <img src="../static/imgs/NN%20Controls/Sigmoid%20Graph.png">
+                <h4>Sigmoid</h4>
+            </div>
+
+            <div class="weights">
+                <h4>Weights</h4>
+                <ol>
+
+                </ol>
+            </div>
+            <div class="bias">
+                <h4>Bias'</h4>
+                <ol>
+
+                </ol>
+            </div>
+            <!-- wtns == what the node see's -->
+            <div class="wtns">
+                <h4>What the Node see's</h4>
+                <div class="node-image-container">
+
+                    <div class="node">
+                        <span>...</span>
+                    </div>
+
+                    <svg class="line" height="10" width="56">
+                        <line x1="0" y1="5" x2="56" y2="5"></line>
+                    </svg>
+
+                    <img src="https://via.placeholder.com/93">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="result">
+
+</div>
+
+</body>
+<script src="{{ url_for('static', filename = 'js/network.js') }}"></script>
+</html>
