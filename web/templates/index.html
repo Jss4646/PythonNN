@@ -46,7 +46,7 @@
                     <ol class="node-list hidden-list">
                         <li>Node 1</li>
                         <li>Node 2</li>
-                        <li>Node 3word</li>
+                        <li>Node 3</li>
                         <li>Node 4</li>
                         <img class="add-node" src="https://via.placeholder.com/20">
                     </ol>
@@ -84,68 +84,7 @@
     Nodes will be added
     -->
     <div class="layers">
-        <div class="layer" id="layer-1-viewport">
 
-            <h2>Layer 1</h2>
-
-            <div class="layer-nodes">
-                <div class="node sigmoid-node no-hover" id="l1-node-1-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l1-node-2-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l1-node-3-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l1-node-4-viewport">
-                    <span>0.012</span>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="layer" id="layer-2-viewport">
-
-            <h2>Layer 2</h2>
-
-            <div class="layer-nodes">
-                <div class="node sigmoid-node no-hover" id="l2-node-1-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l2-node-2-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l2-node-3-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l2-node-4-viewport">
-                    <span>0.012</span>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="layer" id="layer-3-viewport">
-
-            <h2>Layer 3</h2>
-
-            <div class="layer-nodes">
-                <div class="node sigmoid-node no-hover" id="l3-node-1-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l3-node-2-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l3-node-3-viewport">
-                    <span>0.012</span>
-                </div>
-                <div class="node sigmoid-node no-hover" id="l3-node-4-viewport">
-                    <span>0.012</span>
-                </div>
-            </div>
-
-        </div>
     </div>
 
 
@@ -189,7 +128,7 @@
             Epochs
          -->
 
-        <img src="https://via.placeholder.com/125" class="input-image" id="input-image">
+        <img src="https://via.placeholder.com/125" class="input-image" id="input-image" alt="input image">
 
         <div class="NN-info">
 
@@ -239,7 +178,7 @@
         <div class="node-info-container">
             <div class="activation-type">
                 <h4>Activation Type</h4>
-                <img src="../static/imgs/NN%20Controls/Sigmoid%20Graph.png">
+                <img src="../static/imgs/NN%20Controls/Sigmoid%20Graph.png" alt="Activation type graph">
                 <h4>Sigmoid</h4>
             </div>
 
@@ -268,7 +207,7 @@
                         <line x1="0" y1="5" x2="56" y2="5"></line>
                     </svg>
 
-                    <img src="https://via.placeholder.com/93">
+                    <img src="https://via.placeholder.com/93" alt="What the node see's">
 
                 </div>
             </div>
@@ -280,5 +219,6 @@
 </div>
 
 </body>
+<script src="{{ url_for('static', filename = 'js/nodeInteraction.js') }}"></script>
 <script src="{{ url_for('static', filename = 'js/network.js') }}"></script>
 </html>
