@@ -13,7 +13,8 @@
 class Network {
 
     constructor() {
-        this.layers = document.querySelector('.layers');
+        this.viewportLayers = document.querySelector('.layers');
+        this.controlLayers = document.querySelector('.layer-list');
     }
 
     /**
@@ -22,9 +23,9 @@ class Network {
      * @param numLayersAdded - optional, will add one layer and return it if left blank
      * @param numNodesInLayer - optional, will add one node to the layer if left blank
      */
-    addLayer(numLayersAdded = 1, numNodesInLayer = 1) {
+    addViewportLayer(numLayersAdded = 1, numNodesInLayer = 1) {
         for (let i = 0; i < numLayersAdded; i++) {
-            let numOfLayers = this.layers.childElementCount;
+            let numOfLayers = this.viewportLayers.childElementCount;
 
             const layer = document.createElement('div');
             layer.classList.add('layer');
@@ -38,9 +39,9 @@ class Network {
             nodes.classList.add('layer-nodes');
             layer.appendChild(nodes);
 
-            this.addNode(layer, numNodesInLayer);
+            this.addViewportNode(layer, numNodesInLayer);
 
-            this.layers.appendChild(layer);
+            this.viewportLayers.appendChild(layer);
 
             if (numLayersAdded === 1) {
                 return layer;
@@ -54,7 +55,7 @@ class Network {
      * @param numNodesAdded - optional, will add one node and return it if left blank
      * @returns {HTMLDivElement}
      */
-    addNode(layer, numNodesAdded = 1) {
+    addViewportNode(layer, numNodesAdded = 1) {
         for (let i = 0; i < numNodesAdded; i++) {
             const nodeList = layer.querySelector('.layer-nodes');
             let numOfNodes = nodeList.childElementCount;
@@ -82,8 +83,8 @@ class Network {
      * Removes a given layer
      * @returns {boolean} - True: Success, False: Failure
      */
-    removeLayer(layer) {
-        if (this.layers.children.length > 1) {
+    removeViewportLayer(layer) {
+        if (this.viewportLayers.children.length > 1) {
             layer.remove();
             return true;
         } else {
@@ -97,7 +98,7 @@ class Network {
      * @param layer - layer that node will be removed from
      * @returns {boolean} - True: Success, False: Failure
      */
-    removeNode(layer) {
+    removeViewportNode(layer) {
         const nodes = layer.querySelector('.layer-nodes');
 
         if (nodes.childNodes.length > 1) {
@@ -108,8 +109,74 @@ class Network {
             return false;
         }
     };
+
+    addControlLayer(numLayersAdded = 1, numNodesInLayer = 1) {
+        for (let i = 0; i < numLayersAdded; i++) {
+            let numOfLayers = this.controlLayers.childElementCount;
+
+            const layerGroup = document.createElement('li');
+            layerGroup.classList.add('layer-group');
+            layerGroup.id = `layer-${numOfLayers + 1}`;
+
+            const layerBar = document.createElement('div');
+            layerBar.classList.add('layer-bar');
+
+            const deleteLayerIcon = document.createElement('img');
+            deleteLayerIcon.classList.add('delete-layer');
+            deleteLayerIcon.scr = 'https://via.placeholder.com/20';
+            //TODO add functionality to delete layer
+
+            const layerText = document.createElement('span');
+            layerText.classList.add('layer-text');
+            layerText.innerText = `Layer ${numOfLayers + 1}`;
+
+            const dropDownIcon = document.createElement('img');
+            dropDownIcon.classList.add('drop-down-button');
+            dropDownIcon.src = 'https://via.placeholder.com/20';
+            //TODO add functionality to drop down
+
+            layerBar.appendChild(deleteLayerIcon);
+            layerBar.appendChild(layerText);
+            layerBar.appendChild(dropDownIcon);
+
+            layerGroup.appendChild(layerBar);
+
+            const nodeList = document.createElement('ol');
+            nodeList.classList.add('node-list');
+            //TODO make nodes inside node div
+            layerGroup.appendChild(nodeList);
+
+            this.addControlNode(layerGroup, numNodesInLayer);
+
+            this.controlLayers.appendChild(layerGroup);
+
+            if (numLayersAdded === 1) {
+                return layerGroup;
+            }
+        }
+    };
+
+    addControlNode(layer, numNodesAdded = 1) {
+        let numOfLayers = this.controlLayers.childElementCount;
+
+        for (let i = 0; i < numNodesAdded; i++) {
+            const nodeLayer = layer.querySelector('.node-list');
+            let numOfNodes = nodeLayer.childElementCount;
+
+            const node = document.createElement('li');
+            node.id = `l${numOfLayers + 1}-node-${numOfNodes + 1}`;
+            node.innerText = `Node ${numOfNodes + 1}`;
+
+            nodeLayer.appendChild(node);
+
+            if (numNodesAdded === 1) {
+                return node;
+            }
+        }
+
+    };
 }
 
 const nn = new Network();
-nn.addLayer(4, 4);
+nn.addViewportLayer(4, 4);
 
