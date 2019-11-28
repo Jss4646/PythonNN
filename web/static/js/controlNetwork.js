@@ -1,3 +1,6 @@
+/**
+ * Controls the control network GUI
+ */
 class controlNetwork {
     constructor() {
         this.layers = document.querySelector('.layer-list');

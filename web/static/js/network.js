@@ -1,4 +1,7 @@
 /**
+ * The primary network that handles both the control and viewport GUI networks
+ * It also
+ *
  * @class
  * Remove or add layers to and from the network viewport
  *
