@@ -69,10 +69,11 @@ h2 {
     align-items: center;
 
     background: #384950;
-    width: 254px;
+    width: 258px;
     height: 424px;
     border-radius: 27px;
     overflow-y: auto;
+    z-index: 2;
 }
 
 .NN-controls ol {
