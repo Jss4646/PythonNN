@@ -33,7 +33,7 @@ class viewportNetwork {
     /**
      * Adds a specified amount of nodes to a layer
      *
-     * @param {object} layer - layer you want to add nodes too
+     * @param {HTMLElement} layer - layer you want to add nodes too
      * @param {int} numNodesAdded - how many nodes you want to add, defaults to 1 if left blank
      */
     addNode(layer, numNodesAdded = 1) {
@@ -58,7 +58,7 @@ class viewportNetwork {
     /**
      * Removes a given layer
      *
-     * @param {object} layer - layer that will be removed
+     * @param {HTMLElement} layer - layer that will be removed
      */
     removeLayer(layer) {
         const layers = this.layers.children;
@@ -72,7 +72,7 @@ class viewportNetwork {
     /**
      * Removes a node from a given layer
      *
-     * @param {object} layer - layer that the node will be removed from
+     * @param {HTMLElement} layer - layer that the node will be removed from
      */
     removeNode(layer) {
         const nodes = layer.querySelector('.layer-nodes');

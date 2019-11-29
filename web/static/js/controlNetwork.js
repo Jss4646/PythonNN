@@ -34,7 +34,7 @@ class controlNetwork {
             const deleteLayerIcon = document.createElement('img');
             deleteLayerIcon.classList.add('delete-layer');
             deleteLayerIcon.setAttribute('src', 'https://via.placeholder.com/20');
-            //TODO add functionality to delete layer
+            addDeleteLayerInteraction(deleteLayerIcon);
 
             const layerText = document.createElement('span');
             layerText.classList.add('layer-text');
@@ -43,7 +43,7 @@ class controlNetwork {
             const dropDownIcon = document.createElement('img');
             dropDownIcon.classList.add('drop-down-button');
             dropDownIcon.setAttribute('src', 'https://via.placeholder.com/20');
-            //TODO add functionality to drop down
+            addDropdownInteraction(dropDownIcon);
 
             layerBar.appendChild(deleteLayerIcon);
             layerBar.appendChild(layerText);
@@ -53,13 +53,28 @@ class controlNetwork {
 
             const nodeList = document.createElement('ol');
             nodeList.classList.add('node-list');
+            nodeList.classList.add('hidden-list');
+
+
+            const nodeControls = document.createElement('div');
+            nodeControls.classList.add('node-controls');
+            nodeControls.classList.add('hidden-list');
+
+            const removeNode = document.createElement('img');
+            removeNode.classList.add('remove-node');
+            removeNode.src = 'https://via.placeholder.com/20';
+            addDeleteNodeInteraction(removeNode);
 
             const addNode = document.createElement('img');
             addNode.classList.add('add-node');
             addNode.src = 'https://via.placeholder.com/20';
+            addAddNodeFunctionality(addNode);
+
+            nodeControls.appendChild(removeNode);
+            nodeControls.appendChild(addNode);
 
             layerGroup.appendChild(nodeList);
-            layerGroup.appendChild(addNode);
+            layerGroup.appendChild(nodeControls);
 
             this.addNode(layerGroup, numNodesInLayer);
 
@@ -70,7 +85,7 @@ class controlNetwork {
     /**
      * Adds a specified amount of nodes to a layer
      *
-     * @param {object} layer - layer you want to add nodes too
+     * @param {HTMLElement} layer - layer you want to add nodes too
      * @param {int} numNodesAdded - how many nodes you want to add, defaults to 1 if left blank
      */
     addNode(layer, numNodesAdded = 1) {
@@ -88,7 +103,7 @@ class controlNetwork {
     /**
      * Removes a given layer
      *
-     * @param {object} layer - layer that will be removed
+     * @param {HTMLElement} layer - layer that will be removed
      */
     removeLayer(layer) {
         const layers = this.layers.children;
@@ -102,7 +117,7 @@ class controlNetwork {
     /**
      * Removes a node from a given layer
      *
-     * @param {object} layer - layer that the node will be removed from
+     * @param {HTMLElement} layer - layer that the node will be removed from
      */
     removeNode(layer) {
         const layerNodes = layer.querySelector('.node-list');

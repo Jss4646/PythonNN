@@ -77,6 +77,6 @@ class Network {
     }
 }
 
-const nn = new Network();
-nn.addLayer(3, 3);
+const network = new Network();
+network.addLayer(3, 3);
 

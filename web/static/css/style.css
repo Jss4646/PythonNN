@@ -104,7 +104,7 @@ h2 {
 }
 
 .hidden-list {
-    display: none;
+    display: none !important;
     overflow: hidden;
 }
 
@@ -113,6 +113,12 @@ h2 {
     margin: 5px 5px;
     padding: 2px 0;
     border-radius: 27px;
+}
+
+.node-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .add-layer {
