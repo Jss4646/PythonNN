@@ -1,11 +1,26 @@
 /**
+ * @class
  * Controls the control network GUI
+ *
+ * @property {object} layers - holds the control network layers
+ *
+ * @function  addLayer
+ * @function  addNode
+ * @function  removeLayer
+ * @function  removeNode
+ *
  */
 class controlNetwork {
     constructor() {
         this.layers = document.querySelector('.layer-list');
     }
 
+    /**
+     * Creates a new layer and adds it to the layer group
+     *
+     * @param {int} numLayersAdded - number of layers to add, will add 1 if left blank
+     * @param {int} numNodesInLayer - number of nodes to add to each layer, will add 1 if left blank
+     */
     addLayer(numLayersAdded = 1, numNodesInLayer = 1) {
         for (let i = 0; i < numLayersAdded; i++) {
             let numOfLayers = this.layers.childElementCount;
@@ -52,6 +67,12 @@ class controlNetwork {
         }
     };
 
+    /**
+     * Adds a specified amount of nodes to a layer
+     *
+     * @param {object} layer - layer you want to add nodes too
+     * @param {int} numNodesAdded - how many nodes you want to add, defaults to 1 if left blank
+     */
     addNode(layer, numNodesAdded = 1) {
         for (let i = 0; i < numNodesAdded; i++) {
             const nodeLayer = layer.querySelector('.node-list');
@@ -61,23 +82,28 @@ class controlNetwork {
             node.innerText = `Node ${numOfNodes + 1}`;
 
             nodeLayer.appendChild(node);
-
-            if (numNodesAdded === 1) {
-                return node;
-            }
         }
     };
 
-    removeLayer(layerIndex) {
+    /**
+     * Removes a given layer
+     *
+     * @param {object} layer - layer that will be removed
+     */
+    removeLayer(layer) {
         const layers = this.layers.children;
-        layers[layerIndex].remove();
+        layer.remove();
 
         for (let i = 0; i < layers.length; i++) {
             layers[i].querySelector('.layer-text').innerText = `Layer ${i + 1}`
         }
-        return true;
     }
 
+    /**
+     * Removes a node from a given layer
+     *
+     * @param {object} layer - layer that the node will be removed from
+     */
     removeNode(layer) {
         const layerNodes = layer.querySelector('.node-list');
         layerNodes.lastChild.remove();

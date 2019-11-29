@@ -1,6 +1,7 @@
 import unittest
 from Network import Neuron, sigmoid, relu, Network, labels, data_set, layers
 
+
 # TODO add more print statements
 class NeuronTesting(unittest.TestCase):
     def setUp(self) -> None:

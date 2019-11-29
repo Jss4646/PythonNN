@@ -3,10 +3,11 @@ class viewportNetwork {
         this.layers = document.querySelector('.layers');
     }
 
-     /**
-     * Adds a layer to the network viewport
-     * @param numLayersAdded - optional, will add one layer and return it if left blank
-     * @param numNodesInLayer - optional, will add one node to the layer if left blank
+    /**
+     * Creates a new layer and adds it to the layer group
+     *
+     * @param {int} numLayersAdded - number of layers to add, will add 1 if left blank
+     * @param {int} numNodesInLayer - number of nodes to add to each layer, will add 1 if left blank
      */
     addLayer(numLayersAdded = 1, numNodesInLayer = 1) {
         for (let i = 0; i < numLayersAdded; i++) {
@@ -30,9 +31,10 @@ class viewportNetwork {
     };
 
     /**
-     * Adds a node to a given layer
-     * @param layer - layer that node will be added to
-     * @param numNodesAdded - optional, will add one node and return it if left blank
+     * Adds a specified amount of nodes to a layer
+     *
+     * @param {object} layer - layer you want to add nodes too
+     * @param {int} numNodesAdded - how many nodes you want to add, defaults to 1 if left blank
      */
     addNode(layer, numNodesAdded = 1) {
         for (let i = 0; i < numNodesAdded; i++) {
@@ -55,21 +57,22 @@ class viewportNetwork {
 
     /**
      * Removes a given layer
+     *
+     * @param {object} layer - layer that will be removed
      */
-    removeLayer(layerIndex) {
+    removeLayer(layer) {
         const layers = this.layers.children;
+        layer.remove();
 
-        layers[layerIndex].remove();
-
-        //TODO update layer and node classes and titles
         for (let i = 0; i < layers.length; i++) {
             layers[i].childNodes[0].innerText = `Layer ${i + 1}`;
         }
     };
 
     /**
-     * Removes the last node from a layer
-     * @param layer - layer that node will be removed from
+     * Removes a node from a given layer
+     *
+     * @param {object} layer - layer that the node will be removed from
      */
     removeNode(layer) {
         const nodes = layer.querySelector('.layer-nodes');

@@ -99,9 +99,9 @@ class Network:
     data_set : list
         EG: The MNIST dataset
     layers : dict
-        Tells the network how to setup the layers
+        Tells the network how to setup the viewportLayers
         In the form:
-        layers = {
+        viewportLayers = {
             'layer 1': {
                 'activation': 'relu',
                 'neurons': 10,
