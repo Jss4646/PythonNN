@@ -20,12 +20,12 @@ class Network {
     /**
      * Adds a new layer to each GUI network
      *
-     * @param {int} numLayersAdded - number of layers to add, will add 1 if left blank
+     * @param {int} numLayersToAdd - number of layers to add, will add 1 if left blank
      * @param {int} numNodesInLayer - number of nodes to add to each layer, will add 1 if left blank
      */
-    addLayer(numLayersAdded = 1, numNodesInLayer = 1) {
-        this.controlNetwork.addLayer(numLayersAdded, numNodesInLayer);
-        this.viewportNetwork.addLayer(numLayersAdded, numNodesInLayer);
+    addLayer(numLayersToAdd = 1, numNodesInLayer = 1) {
+        this.controlNetwork.addLayer(numLayersToAdd, numNodesInLayer);
+        this.viewportNetwork.addLayer(numLayersToAdd, numNodesInLayer);
     }
 
     /**
@@ -78,5 +78,4 @@ class Network {
 }
 
 const network = new Network();
-network.addLayer(3, 3);
-
+network.addLayer(4, 3);

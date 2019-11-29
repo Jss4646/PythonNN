@@ -6,11 +6,12 @@ class viewportNetwork {
     /**
      * Creates a new layer and adds it to the layer group
      *
-     * @param {int} numLayersAdded - number of layers to add, will add 1 if left blank
+     * @param {int} numLayersToAdd - number of layers to add, will add 1 if left blank
      * @param {int} numNodesInLayer - number of nodes to add to each layer, will add 1 if left blank
      */
-    addLayer(numLayersAdded = 1, numNodesInLayer = 1) {
-        for (let i = 0; i < numLayersAdded; i++) {
+    //TODO num layers to add
+    addLayer(numLayersToAdd = 1, numNodesInLayer = 1) {
+        for (let i = 0; i < numLayersToAdd; i++) {
             let numOfLayers = this.layers.childElementCount;
 
             const layer = document.createElement('div');
