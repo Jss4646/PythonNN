@@ -15,6 +15,9 @@ class Network {
     constructor() {
         this.controlNetwork = new controlNetwork();
         this.viewportNetwork = new viewportNetwork();
+        this.apiNetwork = new apiNetwork();
+
+        this.addLayer(4, 3);
     }
 
     /**
@@ -26,6 +29,7 @@ class Network {
     addLayer(numLayersToAdd = 1, numNodesInLayer = 1) {
         this.controlNetwork.addLayer(numLayersToAdd, numNodesInLayer);
         this.viewportNetwork.addLayer(numLayersToAdd, numNodesInLayer);
+        this.apiNetwork.addLayers(numLayersToAdd, numNodesInLayer);
     }
 
     /**
@@ -35,11 +39,8 @@ class Network {
      * @param {int} numNodesAdded - how many nodes you want to add, defaults to 1 if left blank
      */
     addNode(layerIndex, numNodesAdded = 1) {
-        const controlLayer = document.querySelectorAll('.layer-group')[layerIndex];
-        this.controlNetwork.addNode(controlLayer, numNodesAdded);
-
-        const viewportLayer = document.querySelectorAll('.layer')[layerIndex];
-        this.viewportNetwork.addNode(viewportLayer, numNodesAdded);
+        this.controlNetwork.addNode(layerIndex, numNodesAdded);
+        this.viewportNetwork.addNode(layerIndex, numNodesAdded);
     }
 
     /**
@@ -48,12 +49,9 @@ class Network {
      * @param {int} layerIndex - the index of the layer that will be removed
      */
     removeLayer(layerIndex) {
-        const controlLayer = document.querySelectorAll('.layer-group')[layerIndex];
-        const viewportLayer = document.querySelectorAll('.layer')[layerIndex];
-
         if (this.controlNetwork.layers.childElementCount > 1) {
-            this.controlNetwork.removeLayer(controlLayer);
-            this.viewportNetwork.removeLayer(viewportLayer);
+            this.controlNetwork.removeLayer(layerIndex);
+            this.viewportNetwork.removeLayer(layerIndex);
         } else {
             console.log('The network has to contain at least one layer');
         }
@@ -65,12 +63,9 @@ class Network {
      * @param {int} layerIndex - index of the layer that the node will be removed from
      */
     removeNode(layerIndex) {
-        const controlLayer = document.querySelectorAll('.layer-group')[layerIndex];
-        const viewportLayer = document.querySelectorAll('.layer')[layerIndex];
-
-        if (controlLayer.querySelector('.node-list').childElementCount > 1) {
-            this.controlNetwork.removeNode(controlLayer);
-            this.viewportNetwork.removeNode(viewportLayer);
+        if (this.controlNetwork.layers.querySelector('.node-list').childElementCount > 1) {
+            this.controlNetwork.removeNode(layerIndex);
+            this.viewportNetwork.removeNode(layerIndex);
         } else {
             console.log('The layer has to contain at least one node');
         }
@@ -78,4 +73,3 @@ class Network {
 }
 
 const network = new Network();
-network.addLayer(4, 3);

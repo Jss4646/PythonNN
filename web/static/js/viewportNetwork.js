@@ -1,3 +1,15 @@
+/**
+ * @class
+ * Controls the control network Control GUI
+ *
+ * @property {object} layers - holds the control network layers
+ *
+ * @function  addLayer
+ * @function  addNode
+ * @function  removeLayer
+ * @function  removeNode
+ *
+ */
 class viewportNetwork {
     constructor() {
         this.layers = document.querySelector('.layers');
@@ -12,46 +24,28 @@ class viewportNetwork {
     //TODO num layers to add
     addLayer(numLayersToAdd = 1, numNodesInLayer = 1) {
         for (let i = 0; i < numLayersToAdd; i++) {
-            let numOfLayers = this.layers.childElementCount;
+            const layer = this.createLayer();
 
-            const layer = document.createElement('div');
-            layer.classList.add('layer');
-
-            const title = document.createElement('h2');
-            title.innerText = `Layer ${numOfLayers + 1}`;
-            layer.appendChild(title);
-
-            const nodes = document.createElement('div');
-            nodes.classList.add('layer-nodes');
-            layer.appendChild(nodes);
-
-            this.addNode(layer, numNodesInLayer);
-
+            const layerIndex = this.layers.childNodes.length;
             this.layers.appendChild(layer);
+
+            this.addNode(layerIndex, numNodesInLayer);
         }
     };
 
     /**
      * Adds a specified amount of nodes to a layer
      *
-     * @param {HTMLElement} layer - layer you want to add nodes too
+     * @param {int} layerIndex - the index of the layer you want to add nodes too
      * @param {int} numNodesAdded - how many nodes you want to add, defaults to 1 if left blank
      */
-    addNode(layer, numNodesAdded = 1) {
+    addNode(layerIndex, numNodesAdded = 1) {
+
+        const layer = document.querySelectorAll('.layer')[layerIndex];
+
         for (let i = 0; i < numNodesAdded; i++) {
             const nodeList = layer.querySelector('.layer-nodes');
-
-            const node = document.createElement('div');
-            node.classList.add('node');
-            node.classList.add('sigmoid-node');
-            node.classList.add('no-hover');
-
-            addNodeInteraction(node);
-
-            const nodeValue = document.createElement('span');
-            nodeValue.innerText = '0.0';
-            node.appendChild(nodeValue);
-
+            const node = this.createNode();
             nodeList.appendChild(node);
         }
     };
@@ -59,9 +53,12 @@ class viewportNetwork {
     /**
      * Removes a given layer
      *
-     * @param {HTMLElement} layer - layer that will be removed
+     * @param {int} layerIndex - layer that will be removed
      */
-    removeLayer(layer) {
+    removeLayer(layerIndex) {
+
+        const layer = document.querySelectorAll('.layer')[layerIndex];
+
         const layers = this.layers.children;
         layer.remove();
 
@@ -73,10 +70,43 @@ class viewportNetwork {
     /**
      * Removes a node from a given layer
      *
-     * @param {HTMLElement} layer - layer that the node will be removed from
+     * @param {int} layerIndex - the index of the layer that the node will be removed from
      */
-    removeNode(layer) {
+    removeNode(layerIndex) {
+
+        const layer = document.querySelectorAll('.layer')[layerIndex];
+
         const nodes = layer.querySelector('.layer-nodes');
         nodes.lastChild.remove();
     };
+
+    createLayer() {
+        let numOfLayers = this.layers.childElementCount;
+
+        const layer = document.createElement('div');
+        layer.classList.add('layer');
+
+        const title = document.createElement('h2');
+        title.innerText = `Layer ${numOfLayers + 1}`;
+        layer.appendChild(title);
+
+        const nodes = document.createElement('div');
+        nodes.classList.add('layer-nodes');
+        layer.appendChild(nodes);
+        return layer;
+    }
+
+    createNode() {
+        const node = document.createElement('div');
+        node.classList.add('node');
+        node.classList.add('sigmoid-node');
+        node.classList.add('no-hover');
+
+        addNodeInteraction(node);
+
+        const nodeValue = document.createElement('span');
+        nodeValue.innerText = '0.0';
+        node.appendChild(nodeValue);
+        return node;
+    }
 }
