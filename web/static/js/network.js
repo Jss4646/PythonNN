@@ -52,6 +52,7 @@ class Network {
         if (this.controlNetwork.layers.childElementCount > 1) {
             this.controlNetwork.removeLayer(layerIndex);
             this.viewportNetwork.removeLayer(layerIndex);
+            this.apiNetwork.removeLayer();
         } else {
             console.log('The network has to contain at least one layer');
         }
