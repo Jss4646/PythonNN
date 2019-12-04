@@ -4,8 +4,8 @@
  *
  * @property {object} layers - holds the control network layers
  *
- * @function  addLayer
- * @function  addNode
+ * @function  addLayers
+ * @function  addNodes
  * @function  removeLayer
  * @function  removeNode
  *
@@ -21,13 +21,13 @@ class controlNetwork {
      * @param {int} numLayersToAdd - number of layers to add, will add 1 if left blank
      * @param {int} numNodesInLayer - number of nodes to add to each layer, will add 1 if left blank
      */
-    addLayer(numLayersToAdd = 1, numNodesInLayer = 1) {
+    addLayers(numLayersToAdd = 1, numNodesInLayer = 1) {
         for (let i = 0; i < numLayersToAdd; i++) {
             const layerGroup = this.createLayer(numNodesInLayer);
             this.layers.appendChild(layerGroup);
 
             const layerIndex = this.layers.childNodes.length - 1;
-            this.addNode(layerIndex, numNodesInLayer);
+            this.addNodes(layerIndex, numNodesInLayer);
         }
     };
 
@@ -37,7 +37,7 @@ class controlNetwork {
      * @param {int} layerIndex - the index of the layer you want to add nodes too
      * @param {int} numNodesAdded - how many nodes you want to add, defaults to 1 if left blank
      */
-    addNode(layerIndex, numNodesAdded = 1) {
+    addNodes(layerIndex, numNodesAdded = 1) {
 
         const layer = document.querySelectorAll('.layer-group')[layerIndex];
 
@@ -62,9 +62,7 @@ class controlNetwork {
         const layers = this.layers.children;
         layer.remove();
 
-        for (let i = 0; i < layers.length; i++) {
-            layers[i].querySelector('.layer-text').innerText = `Layer ${i + 1}`
-        }
+        this.renameLayers(layers);
     }
 
     /**
@@ -73,11 +71,28 @@ class controlNetwork {
      * @param {int} layerIndex - the index of the layer that the node will be removed from
      */
     removeNode(layerIndex) {
-
         const layer = document.querySelectorAll('.layer-group')[layerIndex];
-
         const layerNodes = layer.querySelector('.node-list');
         layerNodes.lastChild.remove();
+    }
+
+    /**
+     * Renames all the layers in the network so they are in order
+     * EG:
+     * layer 1
+     * layer 2
+     * layer 4
+     *
+     * Becomes
+     *
+     * layer 1
+     * layer 3
+     * layer 2
+     */
+    renameLayers(layers) {
+        for (let i = 0; i < layers.length; i++) {
+            layers[i].querySelector('.layer-text').innerText = `Layer ${i + 1}`
+        }
     }
 
     createLayer() {

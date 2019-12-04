@@ -20,7 +20,7 @@ function addDropdownInteraction(dropdownIcon) {
 function addAddLayerInteraction() {
     const addLayerIcon = document.querySelector('.add-layer');
     addLayerIcon.addEventListener('click', function () {
-        network.addLayer(1,3)
+        network.addLayers(1,3)
     });
 }
 
@@ -51,7 +51,7 @@ function addAddNodeFunctionality(addNodeIcon) {
         const title = selectedIcon.path[2].querySelector('.layer-text');
         const index = Number(title.innerHTML.slice(-1)) - 1;
 
-        network.addNode(index);
+        network.addNodes(index);
     })
 }
 

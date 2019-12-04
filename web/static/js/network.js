@@ -4,9 +4,10 @@
  *
  * @property {controlNetwork}  controlNetwork - the control GUI network
  * @property {viewportNetwork} viewportNetwork - the viewport GUI network
+ * @property (apiNetwork} apiNetwork - handles the layers json that will be sent off to the flask server
  *
- * @function  addLayer
- * @function  addNode
+ * @function  addLayers
+ * @function  addNodes
  * @function  removeLayer
  * @function  removeNode
  *
@@ -17,7 +18,7 @@ class Network {
         this.viewportNetwork = new viewportNetwork();
         this.apiNetwork = new apiNetwork();
 
-        this.addLayer(4, 3);
+        this.addLayers(4, 3);
     }
 
     /**
@@ -26,9 +27,9 @@ class Network {
      * @param {int} numLayersToAdd - number of layers to add, will add 1 if left blank
      * @param {int} numNodesInLayer - number of nodes to add to each layer, will add 1 if left blank
      */
-    addLayer(numLayersToAdd = 1, numNodesInLayer = 1) {
-        this.controlNetwork.addLayer(numLayersToAdd, numNodesInLayer);
-        this.viewportNetwork.addLayer(numLayersToAdd, numNodesInLayer);
+    addLayers(numLayersToAdd = 1, numNodesInLayer = 1) {
+        this.controlNetwork.addLayers(numLayersToAdd, numNodesInLayer);
+        this.viewportNetwork.addLayers(numLayersToAdd, numNodesInLayer);
         this.apiNetwork.addLayers(numLayersToAdd, numNodesInLayer);
     }
 
@@ -38,9 +39,10 @@ class Network {
      * @param {int} layerIndex - the index of the layer you want to add nodes too
      * @param {int} numNodesAdded - how many nodes you want to add, defaults to 1 if left blank
      */
-    addNode(layerIndex, numNodesAdded = 1) {
-        this.controlNetwork.addNode(layerIndex, numNodesAdded);
-        this.viewportNetwork.addNode(layerIndex, numNodesAdded);
+    addNodes(layerIndex, numNodesAdded = 1) {
+        this.controlNetwork.addNodes(layerIndex, numNodesAdded);
+        this.viewportNetwork.addNodes(layerIndex, numNodesAdded);
+        this.apiNetwork.addNodes(layerIndex, numNodesAdded);
     }
 
     /**
@@ -52,7 +54,7 @@ class Network {
         if (this.controlNetwork.layers.childElementCount > 1) {
             this.controlNetwork.removeLayer(layerIndex);
             this.viewportNetwork.removeLayer(layerIndex);
-            this.apiNetwork.removeLayer();
+            this.apiNetwork.removeLayer(layerIndex);
         } else {
             console.log('The network has to contain at least one layer');
         }
@@ -67,6 +69,7 @@ class Network {
         if (this.controlNetwork.layers.querySelector('.node-list').childElementCount > 1) {
             this.controlNetwork.removeNode(layerIndex);
             this.viewportNetwork.removeNode(layerIndex);
+            this.apiNetwork.removeNode(layerIndex);
         } else {
             console.log('The layer has to contain at least one node');
         }
