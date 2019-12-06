@@ -20,8 +20,13 @@ playPauseButton.addEventListener('click', function (event) {
 
     const networkJSON = network.apiNetwork.layers;
 
-   fetch(`${_URL_}/setup-network`, {
-       method: 'POST',
-       body: JSON.stringify(networkJSON)
+   fetch(`${window.origin}/setup-network`, {
+       method: "POST",
+       credentials: "include",
+       body: JSON.stringify(networkJSON),
+       cache: "no-cache",
+       headers: new Headers({
+           "content-type": "application/json"
+       })
    })
 });
