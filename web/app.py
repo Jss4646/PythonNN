@@ -17,9 +17,7 @@ def setup_network():
     labels = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0]]
 
     network = Network(data_set, labels, layers)
-    network.train(100)
-    for i in network.layers[-1]:
-        print(f"Output: {i.output}")
+    network.train(1)
     return layers
 
 
