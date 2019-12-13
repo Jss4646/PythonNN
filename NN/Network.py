@@ -155,55 +155,7 @@ class Network:
         feed_forward(data)
 
     def back_prop(self, labels: list, learning_rate=2):
-        self.learning_rate = learning_rate
-        labels = np.asarray(labels)
-
-        # ol = output layer
-        ol = self.layers[-1]
-        ol_activations = [neuron.output for neuron in ol]
-        ol_no_activations = np.asarray([neuron.output_no_activation for neuron in ol])
-
-        # hl = hidden layer
-        hl = self.layers[0:-1]
-        hl.reverse()
-
-        # output_activations = np.fromiter((i.output for i in output_layer), dtype=np.float)
-        # output_cost = np.square(labels - output_activations).mean()
-        #
-        # for label, output_neuron in zip(labels, output_layer):
-        #
-        #     output_neuron.weights += output_cost * learning_rate
-        #
-        #     for hidden_layer in hidden_layers:
-        #         for hidden_neuron in hidden_layer:
-        #
-        #             hidden_cost = 0.5 * (label - hidden_neuron.output) ** 2
-        #             hidden_neuron.weights += hidden_cost * learning_rate
-
-        # ol_delta = (labels - ol_activations) * sigmoid(ol_no_activations, True)
-        # for neuron in ol:
-        #     for weight in neuron.weights:
-        #         weight += ol_delta * learning_rate
-        #
-        # for layer in hl:
-        #     layer_weights = np.asarray([neuron.weights for neuron in layer])
-        #     hl_delta = np.dot(layer_weights, ol_delta) * sigmoid(ol_no_activations, True)
-        #     for neuron in layer:
-        #         neuron.weights += hl_delta * learning_rate
-
-        ol_delta = (labels - ol_activations) * sigmoid(ol_no_activations, True)
-        for label, output_neuron, delta in zip(labels, ol, ol_delta):
-
-            output_neuron.weights -= delta * learning_rate
-
-            for hidden_layer in hl:
-                for hidden_neuron in hidden_layer:
-
-                    hidden_delta = hidden_neuron.weights * delta
-                    hidden_delta *= sigmoid(hidden_neuron.output_no_activation, True)
-                    hidden_neuron.weights -= hidden_delta
-
-        hl.reverse()
+        pass
 
     def train(self, epochs=1):
         for i in range(epochs):
@@ -213,46 +165,46 @@ class Network:
                 self.forward_prop(self.data_set[j])
                 self.back_prop(self.labels[j])
 
-
-data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
-
-layers = {
-    'layer 1': {
-        'activation': 'sigmoid',
-        'neurons': 10,
-    },
-    'layer 2': {
-        'activation': 'sigmoid',
-        'neurons': 20,
-    },
-    'Layer 3': {
-        'activation': 'sigmoid',
-        'neurons': 10,
-    },
-}
-
-labels = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0]]
-
-
-def output_to_file(name):
-    with open(name, 'w') as network_file:
-        np.set_printoptions(precision=4, linewidth=1000)
-        for layer_index, layer in enumerate(network.layers):
-            network_file.write(f'Layer {layer_index}:')
-            for neuron_index, neuron in enumerate(layer):
-                network_file.write(f'\n\tNeuron {neuron_index}:'
-                                   f'\n\t\tWeights:'
-                                   f'\n\t\t\t{neuron.weights}'
-                                   f'\n\t\tOutput: {neuron.output}')
-            network_file.write('\n')
-
-        network_file.write('\nNetwork output:')
-
-
-network = Network(data_set, labels, layers)
-network.train(100)
-for i in network.layers[-1]:
-    print(f"Output: {i.output}")
-output_to_file('network.txt')
-
-
+#
+# data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
+#
+# layers = {
+#     'layer 1': {
+#         'activation': 'sigmoid',
+#         'neurons': 10,
+#     },
+#     'layer 2': {
+#         'activation': 'sigmoid',
+#         'neurons': 20,
+#     },
+#     'Layer 3': {
+#         'activation': 'sigmoid',
+#         'neurons': 10,
+#     },
+# }
+#
+# labels = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0]]
+#
+#
+# def output_to_file(name):
+#     with open(name, 'w') as network_file:
+#         np.set_printoptions(precision=4, linewidth=1000)
+#         for layer_index, layer in enumerate(network.layers):
+#             network_file.write(f'Layer {layer_index}:')
+#             for neuron_index, neuron in enumerate(layer):
+#                 network_file.write(f'\n\tNeuron {neuron_index}:'
+#                                    f'\n\t\tWeights:'
+#                                    f'\n\t\t\t{neuron.weights}'
+#                                    f'\n\t\tOutput: {neuron.output}')
+#             network_file.write('\n')
+#
+#         network_file.write('\nNetwork output:')
+#
+#
+# network = Network(data_set, labels, layers)
+# network.train(100)
+# for i in network.layers[-1]:
+#     print(f"Output: {i.output}")
+# output_to_file('network.txt')
+#
+#
