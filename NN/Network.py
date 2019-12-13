@@ -57,6 +57,7 @@ class Neuron:
         self.bias = np.random.randint(-1, 1)
         self.output = 0
         self.output_no_activation = 0
+        self.error = 0
 
         if activation_function.lower() == 'sigmoid':
             self.activation_function = sigmoid
@@ -98,7 +99,7 @@ class Network:
     ----------
     data_set : list
         EG: The MNIST dataset
-    layers : dict
+    layers : dict-
         Tells the network how to setup the viewportLayers
         In the form:
         viewportLayers = {
@@ -155,7 +156,21 @@ class Network:
         feed_forward(data)
 
     def back_prop(self, labels: list, learning_rate=2):
-        pass
+        output_layer = self.layers[-1]
+        output_layer_outputs = np.asarray([neuron.output for neuron in self.layers[-1]])
+        labels = np.asarray(labels)
+
+        output_errors = (labels - output_layer_outputs) * sigmoid(output_layer_outputs, True)
+        for index, neuron in enumerate(output_layer):
+            neuron.error = output_errors[index]
+
+        self.layers.reverse()
+        for index, layer in enumerate(self.layers[0:-2]):
+            for neuron in self.layers[index + 1]:
+                error = 0.0
+                for output_neuron in layer:
+                    error += neuron.weights * output_neuron.error
+                neuron.error = error
 
     def train(self, epochs=1):
         for i in range(epochs):
@@ -165,46 +180,46 @@ class Network:
                 self.forward_prop(self.data_set[j])
                 self.back_prop(self.labels[j])
 
-#
-# data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
-#
-# layers = {
-#     'layer 1': {
-#         'activation': 'sigmoid',
-#         'neurons': 10,
-#     },
-#     'layer 2': {
-#         'activation': 'sigmoid',
-#         'neurons': 20,
-#     },
-#     'Layer 3': {
-#         'activation': 'sigmoid',
-#         'neurons': 10,
-#     },
-# }
-#
-# labels = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0]]
-#
-#
-# def output_to_file(name):
-#     with open(name, 'w') as network_file:
-#         np.set_printoptions(precision=4, linewidth=1000)
-#         for layer_index, layer in enumerate(network.layers):
-#             network_file.write(f'Layer {layer_index}:')
-#             for neuron_index, neuron in enumerate(layer):
-#                 network_file.write(f'\n\tNeuron {neuron_index}:'
-#                                    f'\n\t\tWeights:'
-#                                    f'\n\t\t\t{neuron.weights}'
-#                                    f'\n\t\tOutput: {neuron.output}')
-#             network_file.write('\n')
-#
-#         network_file.write('\nNetwork output:')
-#
-#
-# network = Network(data_set, labels, layers)
-# network.train(100)
-# for i in network.layers[-1]:
-#     print(f"Output: {i.output}")
-# output_to_file('network.txt')
-#
-#
+
+data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
+
+layers = {
+    'layer 1': {
+        'activation': 'sigmoid',
+        'neurons': 10,
+    },
+    'layer 2': {
+        'activation': 'sigmoid',
+        'neurons': 20,
+    },
+    'Layer 3': {
+        'activation': 'sigmoid',
+        'neurons': 10,
+    },
+}
+
+labels = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+
+def output_to_file(name):
+    with open(name, 'w') as network_file:
+        np.set_printoptions(precision=4, linewidth=1000)
+        for layer_index, layer in enumerate(network.layers):
+            network_file.write(f'Layer {layer_index}:')
+            for neuron_index, neuron in enumerate(layer):
+                network_file.write(f'\n\tNeuron {neuron_index}:'
+                                   f'\n\t\tWeights:'
+                                   f'\n\t\t\t{neuron.weights}'
+                                   f'\n\t\tOutput: {neuron.output}')
+            network_file.write('\n')
+
+        network_file.write('\nNetwork output:')
+
+
+network = Network(data_set, labels, layers)
+network.train(100)
+for i in network.layers[-1]:
+    print(f"Output: {i.output}")
+output_to_file('network.txt')
+
+
