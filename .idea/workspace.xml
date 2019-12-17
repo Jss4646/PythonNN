@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/NN/Network.py" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,8 +86,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NN/Network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="157" column="12" selection-start-line="157" selection-start-column="12" selection-end-line="157" selection-end-column="12" />
+            <state relative-caret-position="246">
+              <caret line="151" selection-start-line="151" selection-end-line="151" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -265,6 +265,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/NN/Network Tests.py" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -294,7 +295,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flask server.PythonNN">
+  <component name="RunManager" selected="Python.Network">
     <configuration name="PythonNN Site" type="JavascriptDebugType" uri="http://127.0.0.1:5000/" useFirstLineBreakpoints="true">
       <method v="2" />
     </configuration>
@@ -302,9 +303,6 @@
       <module name="PythonNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="C:\Users\jacks\Documents\Coding\Python\PythonNN\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NN" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -403,7 +401,7 @@
       <workItem from="1575450142326" duration="9154000" />
       <workItem from="1575627335780" duration="4208000" />
       <workItem from="1575895024687" duration="1650000" />
-      <workItem from="1576232141307" duration="612000" />
+      <workItem from="1576232141307" duration="5381000" />
     </task>
     <task id="LOCAL-00001" summary="backprop update">
       <created>1570042557354</created>
@@ -454,7 +452,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575639710020</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Backprop update">
+      <created>1576243876452</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1576243876452</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -466,27 +471,28 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61165000" />
+    <option name="totallyTimeSpent" value="65934000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17430703" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4978678" weight="0.3290461" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53731346" weight="0.3290461" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7398721" weight="0.29046088" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.53678036" weight="0.44480172" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.739339" visible="true" weight="0.48338693" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3290461" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.46268657" side_tool="true" visible="true" weight="0.3290461" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.26066098" side_tool="true" visible="true" weight="0.48338693" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3290461" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49946696" weight="0.3601286" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.65724945" weight="0.3601286" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -505,15 +511,40 @@
     <MESSAGE value="Documentation for js network" />
     <MESSAGE value="Finished apiNetwork&#10;Added Documentation for apiNetwork and create functions&#10;Split to renameLayers" />
     <MESSAGE value="Started work on play-pause button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started work on play-pause button" />
+    <MESSAGE value="Backprop update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Backprop update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NN/Network.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="inputs" />
+        <watch expression="self.weights" />
+        <watch expression="inputs.__len__()" />
+        <watch expression="len(self.weights)" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1575898465472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PythonNN$Network.coverage" NAME="Network Coverage Results" MODIFIED="1570184580261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
+    <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1576233110475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_in_Network_Tests_py.coverage" NAME="Unittests in Network Tests.py Coverage Results" MODIFIED="1572873439119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PythonNN$Network.coverage" NAME="Network Coverage Results" MODIFIED="1576237145959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>len(self.weights)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>network.apiNetwork.layers</expression-string>
         <language-id>JavaScript</language-id>
@@ -673,8 +704,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NN/Network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="157" column="12" selection-start-line="157" selection-start-column="12" selection-end-line="157" selection-end-column="12" />
+        <state relative-caret-position="246">
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
