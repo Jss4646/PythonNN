@@ -26,7 +26,7 @@ class Neuron:
     num_of_inputs : int, optional
         Inputs from either the source image or a previous layer
 
-    activation_function : str
+    activation_function : str-
         Tells the node what activation type to use
         Supported activation types:
             -Sigmoid
@@ -155,7 +155,7 @@ class Network:
 
         feed_forward(data)
 
-    def back_prop(self, labels: list, learning_rate=2):
+    def back_prop(self, labels: list):
         output_layer = self.layers[-1]
         output_layer_outputs = np.asarray([neuron.output for neuron in self.layers[-1]])
         labels = np.asarray(labels)
@@ -171,6 +171,28 @@ class Network:
                 for output_neuron in layer:
                     error += neuron.weights * output_neuron.error
                 neuron.error = error
+                print()
+        self.layers.reverse()
+
+    def update_weights(self, data, learning_rate=0.1):
+
+        output_layer = self.layers[-1]
+        hidden_layers = self.layers[0:-2]
+
+        for neuron in output_layer:
+            for weight in neuron.weights:
+                weight += learning_rate * neuron.error
+
+        for index, layer in enumerate(hidden_layers):
+
+            next_layer_outputs = [neuron.output for neuron in hidden_layers[index + 1]]
+
+            for neuron in layer:
+                for weight in neuron.weights:
+                    weight += learning_rate * neuron.error
+
+
+
 
     def train(self, epochs=1):
         for i in range(epochs):
@@ -217,9 +239,12 @@ def output_to_file(name):
 
 
 network = Network(data_set, labels, layers)
-network.train(100)
+
 for i in network.layers[-1]:
-    print(f"Output: {i.output}")
-output_to_file('network.txt')
+    print(f"Weights: {i.weights}")
+network.train(2)
+for i in network.layers[-1]:
+    print(f"Error: {i.error}")
+
 
 
