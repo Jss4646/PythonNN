@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoTestManager">
+    <enabled-run-configurations>
+      <run-configuration type="tests" name="Unittests in Network Tests.py" />
+    </enabled-run-configurations>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/PythonNN.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonNN.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NN/Network Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Network Tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NN/Network.py" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NN/Torch_Network_Testing.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Torch_Network_Testing.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NN/network.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NN/network.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="462" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -34,16 +40,6 @@
         <option value="JavaScript File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>layer</find>
-      <find>layer-bar</find>
-      <find>nn-view</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -97,7 +93,7 @@
       <recent name="C:\Users\jacks\Documents\Coding\Python\PythonNN\web\static" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.scratch">
+  <component name="RunManager" selected="Python tests.Unittests in Network Tests.py">
     <configuration name="PythonNN Site" type="JavascriptDebugType" uri="http://127.0.0.1:5000/" useFirstLineBreakpoints="true">
       <method v="2" />
     </configuration>
@@ -105,9 +101,6 @@
       <module name="PythonNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NN" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -182,14 +175,48 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for Network Tests.NeuronTesting.test_neuron_run" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="PythonNN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NN" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;Network Tests.NeuronTesting.test_neuron_run&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests in Network Tests.py" type="tests" factoryName="Unittests" nameIsGenerated="true">
+      <module name="PythonNN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_pattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/NN/Network Tests.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Flask server.PythonNN" />
       <item itemvalue="JavaScript Debug.PythonNN Site" />
       <item itemvalue="Python.Network" />
       <item itemvalue="Python.scratch" />
-      <item itemvalue="Flask server.PythonNN" />
+      <item itemvalue="Python tests.Unittests in Network Tests.py" />
+      <item itemvalue="Python tests.Unittests for Network Tests.NeuronTesting.test_neuron_run" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for Network Tests.NeuronTesting.test_neuron_run" />
         <item itemvalue="Python.scratch" />
       </list>
     </recent_temporary>
@@ -231,6 +258,7 @@
       <workItem from="1575895024687" duration="1650000" />
       <workItem from="1576232141307" duration="612000" />
       <workItem from="1576244443966" duration="5332000" />
+      <workItem from="1576854186934" duration="4352000" />
     </task>
     <task id="LOCAL-00001" summary="backprop update">
       <created>1570042557354</created>
@@ -281,7 +309,21 @@
       <option name="project" value="LOCAL" />
       <updated>1575639710020</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Backprop and update weights functions created">
+      <created>1576854333799</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1576854333799</updated>
+    </task>
+    <task id="LOCAL-00009" summary="workspace">
+      <created>1576854392412</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1576854392412</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,69 +336,75 @@
     <MESSAGE value="Documentation for js network" />
     <MESSAGE value="Finished apiNetwork&#10;Added Documentation for apiNetwork and create functions&#10;Split to renameLayers" />
     <MESSAGE value="Started work on play-pause button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started work on play-pause button" />
+    <MESSAGE value="Backprop and update weights functions created" />
+    <MESSAGE value="workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1571" y="374" key="#Unittests_for_Network_Tests.NeuronTesting" timestamp="1576244571371">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
+    <state x="-1571" y="374" key="#Unittests_for_Network_Tests.NeuronTesting.test_neuron_run" timestamp="1576856591400">
+      <screen x="-2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-1571" y="374" key="#Unittests_for_Network_Tests.NeuronTesting.test_neuron_run/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856591400" />
     <state x="-1571" y="374" key="#Unittests_for_Network_Tests.NeuronTesting.test_relu" timestamp="1576244554187">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
     <state x="-1571" y="374" key="#Unittests_for_Network_Tests.NeuronTesting.test_relu/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576244554187" />
     <state x="-1571" y="374" key="#Unittests_for_Network_Tests.NeuronTesting/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576244571371" />
-    <state x="-1816" y="393" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576245244355">
+    <state x="-1816" y="393" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576857281781">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state x="-1816" y="393" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576245244355" />
+    <state x="-1816" y="393" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576857281781" />
     <state x="404" y="390" width="961" height="591" key="#xdebugger.evaluate" timestamp="1576245666670">
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
     <state x="404" y="390" width="961" height="591" key="#xdebugger.evaluate/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576245666670" />
-    <state x="-1701" y="334" width="1426" height="944" key="CommitChangelistDialog2" timestamp="1576854377528">
+    <state x="-1701" y="334" width="1426" height="944" key="CommitChangelistDialog2" timestamp="1576854392271">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state x="-1701" y="334" width="1426" height="944" key="CommitChangelistDialog2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854377528" />
-    <state width="2518" height="356" key="GridCell.Tab.0.bottom" timestamp="1576251304767">
+    <state x="-1701" y="334" width="1426" height="944" key="CommitChangelistDialog2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854392271" />
+    <state width="2518" height="384" key="GridCell.Tab.0.bottom" timestamp="1576858417222">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="356" key="GridCell.Tab.0.bottom/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576251304767" />
-    <state width="2518" height="356" key="GridCell.Tab.0.center" timestamp="1576251304767">
+    <state width="2518" height="384" key="GridCell.Tab.0.bottom/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417222" />
+    <state width="2518" height="384" key="GridCell.Tab.0.center" timestamp="1576858417221">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="356" key="GridCell.Tab.0.center/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576251304767" />
-    <state width="2518" height="356" key="GridCell.Tab.0.left" timestamp="1576251304766">
+    <state width="2518" height="384" key="GridCell.Tab.0.center/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417221" />
+    <state width="2518" height="384" key="GridCell.Tab.0.left" timestamp="1576858417220">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="356" key="GridCell.Tab.0.left/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576251304766" />
-    <state width="2518" height="356" key="GridCell.Tab.0.right" timestamp="1576251304767">
+    <state width="2518" height="384" key="GridCell.Tab.0.left/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417220" />
+    <state width="2518" height="384" key="GridCell.Tab.0.right" timestamp="1576858417221">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="356" key="GridCell.Tab.0.right/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576251304767" />
-    <state width="2518" height="356" key="GridCell.Tab.1.bottom" timestamp="1576251304769">
+    <state width="2518" height="384" key="GridCell.Tab.0.right/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417221" />
+    <state width="2518" height="685" key="GridCell.Tab.1.bottom" timestamp="1576856199794">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="356" key="GridCell.Tab.1.bottom/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576251304769" />
-    <state width="2518" height="356" key="GridCell.Tab.1.center" timestamp="1576251304768">
+    <state width="2518" height="685" key="GridCell.Tab.1.bottom/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199794" />
+    <state width="2518" height="685" key="GridCell.Tab.1.center" timestamp="1576856199793">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="356" key="GridCell.Tab.1.center/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576251304768" />
-    <state width="2518" height="356" key="GridCell.Tab.1.left" timestamp="1576251304768">
+    <state width="2518" height="685" key="GridCell.Tab.1.center/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199793" />
+    <state width="2518" height="685" key="GridCell.Tab.1.left" timestamp="1576856199792">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="356" key="GridCell.Tab.1.left/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576251304768" />
-    <state width="2518" height="356" key="GridCell.Tab.1.right" timestamp="1576251304768">
+    <state width="2518" height="685" key="GridCell.Tab.1.left/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199792" />
+    <state width="2518" height="685" key="GridCell.Tab.1.right" timestamp="1576856199793">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="356" key="GridCell.Tab.1.right/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576251304768" />
+    <state width="2518" height="685" key="GridCell.Tab.1.right/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199793" />
     <state x="-1567" y="454" key="MultipleFileMergeDialog" timestamp="1576854352534">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
     <state x="-1567" y="454" key="MultipleFileMergeDialog/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854352534" />
-    <state x="-1680" y="471" key="Vcs.Push.Dialog.v2" timestamp="1576854336108">
+    <state x="-1680" y="471" key="Vcs.Push.Dialog.v2" timestamp="1576854395970">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
-    <state x="-1680" y="471" key="Vcs.Push.Dialog.v2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854336108" />
+    <state x="-1680" y="471" key="Vcs.Push.Dialog.v2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854395970" />
     <state x="-1491" y="655" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576854364419">
       <screen x="-2560" y="23" width="2560" height="1417" />
     </state>
@@ -379,9 +427,9 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1575898465472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PythonNN$Network.coverage" NAME="Network Coverage Results" MODIFIED="1576246204537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
+    <SUITE FILE_PATH="coverage/PythonNN$Network.coverage" NAME="Network Coverage Results" MODIFIED="1576856188759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1576248119752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/PythonNN$Unittests_in_Network_Tests_py.coverage" NAME="Unittests in Network Tests.py Coverage Results" MODIFIED="1576244546219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PythonNN$Unittests_in_Network_Tests_py.coverage" NAME="Unittests in Network Tests.py Coverage Results" MODIFIED="1576858417208" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting.coverage" NAME="Unittests for Network Tests.NeuronTesting Coverage Results" MODIFIED="1576244577364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
   </component>
 </project>

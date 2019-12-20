@@ -4,9 +4,18 @@ from Network import Neuron, sigmoid, relu, Network, labels, data_set, layers
 
 # TODO add more print statements
 class NeuronTesting(unittest.TestCase):
+    """
+
+    """
     def setUp(self) -> None:
         self.test_neurons = []
+
         self.network = Network(data_set, labels, layers)
+        neuron_inputs = [[0.23, 0.51, 0.24, 0.12], [], [1, 5, 200000, -2]]
+        neuron_activations = ['sigmoid', 'sigmoid', 'relu']
+
+        for neuron_input, neuron_activation in zip(neuron_inputs, neuron_activations):
+            self.add_neuron(neuron_input, neuron_activation)
 
     def add_neuron(self, neuron_input, neuron_activation):
         self.test_neurons.append(Neuron(len(neuron_input), neuron_activation))
@@ -23,11 +32,10 @@ class NeuronTesting(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.add_neuron([0], 'other')
 
-        neuron_inputs = [[0.23, 0.51, 0.24, 0.12], [], [1, 5, 200000, -2]]
-        neuron_activations = ['sigmoid', 'sigmoid', 'relu']
-
-        for neuron_input, neuron_activation in zip(neuron_inputs, neuron_activations):
-            self.add_neuron(neuron_input, neuron_activation)
+    def test_weights(self):
+        output_layer = self.network.layers[-1]
+        for neuron in output_layer:
+            self.assertIsNotNone(neuron.weights)
 
     def test_neuron_run(self):
         for test_neuron in self.test_neurons:

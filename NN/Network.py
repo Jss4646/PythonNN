@@ -1,6 +1,9 @@
 from typing import List, Any
 
 import numpy as np
+import random
+
+np.random.seed(1)
 
 
 def sigmoid(x, derivative=False) -> float:
@@ -26,7 +29,7 @@ class Neuron:
     num_of_inputs : int, optional
         Inputs from either the source image or a previous layer
 
-    activation_function : str-
+    activation_function : str
         Tells the node what activation type to use
         Supported activation types:
             -Sigmoid
@@ -156,6 +159,10 @@ class Network:
         feed_forward(data)
 
     def back_prop(self, labels: list):
+        self._gen_output_errors(labels)
+        self._gen_hidden_errors()
+
+    def _gen_output_errors(self, labels):
         output_layer = self.layers[-1]
         output_layer_outputs = np.asarray([neuron.output for neuron in self.layers[-1]])
         labels = np.asarray(labels)
@@ -164,6 +171,7 @@ class Network:
         for index, neuron in enumerate(output_layer):
             neuron.error = output_errors[index]
 
+    def _gen_hidden_errors(self):
         self.layers.reverse()
         for index, layer in enumerate(self.layers[0:-2]):
             for neuron in self.layers[index + 1]:
@@ -171,28 +179,32 @@ class Network:
                 for output_neuron in layer:
                     error += neuron.weights * output_neuron.error
                 neuron.error = error
-                print()
         self.layers.reverse()
 
     def update_weights(self, data, learning_rate=0.1):
+        self._update_output_weights(data, learning_rate)
+        self._update_hidden_weights(learning_rate)
 
-        output_layer = self.layers[-1]
-        hidden_layers = self.layers[0:-2]
-
-        for neuron in output_layer:
-            for weight in neuron.weights:
-                weight += learning_rate * neuron.error
-
+    def _update_hidden_weights(self, learning_rate):
+        hidden_layers = self.layers[0:-1]
         for index, layer in enumerate(hidden_layers):
 
-            next_layer_outputs = [neuron.output for neuron in hidden_layers[index + 1]]
+            next_layer_outputs = [neuron.output for neuron in self.layers[index + 1]]
 
             for neuron in layer:
-                for weight in neuron.weights:
-                    weight += learning_rate * neuron.error
+                for weight, next_layer_output in zip(neuron.weights, next_layer_outputs):
+                    weight += learning_rate * neuron.error * next_layer_output
 
+    def _update_output_weights(self, data, learning_rate):
+        output_layer = self.layers[-1]
+        for neuron in output_layer:
+            for weight, network_input in zip(neuron.weights, data):
+                weight += learning_rate * neuron.error * network_input
 
-
+    # def update_biases(self, learning_rate=0.1):
+    #
+    #     output_layer = self.layers[-1]
+    #     hidden_layer = self.layers[0:-2]
 
     def train(self, epochs=1):
         for i in range(epochs):
@@ -201,6 +213,7 @@ class Network:
                 print(f"\tData {j + 1}")
                 self.forward_prop(self.data_set[j])
                 self.back_prop(self.labels[j])
+                self.update_weights(self.data_set[j])
 
 
 data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
@@ -241,10 +254,10 @@ def output_to_file(name):
 network = Network(data_set, labels, layers)
 
 for i in network.layers[-1]:
-    print(f"Weights: {i.weights}")
+    print(f"Weights: {i.output}")
 network.train(2)
 for i in network.layers[-1]:
-    print(f"Error: {i.error}")
+    print(f"Output: {i.output}")
 
 
 
