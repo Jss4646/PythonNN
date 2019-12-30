@@ -3,8 +3,6 @@ from typing import List, Any
 import numpy as np
 import random
 
-np.random.seed(1)
-
 
 def sigmoid(x, derivative=False) -> float:
     sigm = 1 / (1 + np.exp(-x))
@@ -29,7 +27,7 @@ class Neuron:
     num_of_inputs : int, optional
         Inputs from either the source image or a previous layer
 
-    activation_function : str
+    activation_function : str-
         Tells the node what activation type to use
         Supported activation types:
             -Sigmoid
@@ -51,16 +49,16 @@ class Neuron:
         See : http://neuralnetworksanddeeplearning.com/chap1.html#sigmoid_neurons
               for the maths behind a Neuron
 
-        See : https://cs231n.github.io/neural-networks-2/#init
+        See : https://cs231n.github.io/neural-netwworks-2/#init
             For network setup best practices
     """
 
     def __init__(self, num_of_inputs: int, activation_function='sigmoid'):
         self.weights = 0.1 * np.random.standard_normal(num_of_inputs)
-        self.bias = np.random.randint(-1, 1)
-        self.output = 0
+        self.bias = 0.0
+        self.output = 0.0
         self.output_no_activation = 0
-        self.error = 0
+        self.error = None
 
         if activation_function.lower() == 'sigmoid':
             self.activation_function = sigmoid
@@ -126,7 +124,6 @@ class Network:
         self.layers = []
         self.labels = labels
         self.data_set = data_set
-        self.learning_rate = 1
 
         for index, layer in enumerate(layers.values()):
             activation = layer['activation']
@@ -164,7 +161,7 @@ class Network:
 
     def _gen_output_errors(self, labels):
         output_layer = self.layers[-1]
-        output_layer_outputs = np.asarray([neuron.output for neuron in self.layers[-1]])
+        output_layer_outputs = np.asarray([neuron.output for neuron in output_layer])
         labels = np.asarray(labels)
 
         output_errors = (labels - output_layer_outputs) * sigmoid(output_layer_outputs, True)
@@ -173,20 +170,26 @@ class Network:
 
     def _gen_hidden_errors(self):
         self.layers.reverse()
-        for index, layer in enumerate(self.layers[0:-2]):
+        for index, layer in enumerate(self.layers[0:-1]):
             for neuron in self.layers[index + 1]:
                 error = 0.0
                 for output_neuron in layer:
-                    error += neuron.weights * output_neuron.error
+                    error += sum(neuron.weights * output_neuron.error)
                 neuron.error = error
         self.layers.reverse()
 
     def update_weights(self, data, learning_rate=0.1):
-        self._update_output_weights(data, learning_rate)
+        self._update_input_weights(data, learning_rate)
         self._update_hidden_weights(learning_rate)
 
+    def _update_input_weights(self, data, learning_rate):
+        input_layer = self.layers[0]
+        for neuron in input_layer:
+            for index, network_input in enumerate(data):
+                neuron.weights[index] += learning_rate * neuron.error * network_input
+
     def _update_hidden_weights(self, learning_rate):
-        hidden_layers = self.layers[0:-1]
+        hidden_layers = self.layers[1:]
         for index, layer in enumerate(hidden_layers):
 
             next_layer_outputs = [neuron.output for neuron in self.layers[index + 1]]
@@ -195,12 +198,6 @@ class Network:
                 for weight, next_layer_output in zip(neuron.weights, next_layer_outputs):
                     weight += learning_rate * neuron.error * next_layer_output
 
-    def _update_output_weights(self, data, learning_rate):
-        output_layer = self.layers[-1]
-        for neuron in output_layer:
-            for weight, network_input in zip(neuron.weights, data):
-                weight += learning_rate * neuron.error * network_input
-
     # def update_biases(self, learning_rate=0.1):
     #
     #     output_layer = self.layers[-1]
@@ -208,12 +205,15 @@ class Network:
 
     def train(self, epochs=1):
         for i in range(epochs):
-            print(f"\nEpoch {i + 1}")
+            if (i + 1) % 10 == 0:
+                print(f"\nEpoch {i + 1}")
             for j in range(len(self.data_set)):
-                print(f"\tData {j + 1}")
+                if (i + 1) % 10 == 0:
+                    print(f"\tData {j + 1}")
+                    print(f"\t\tError: {[i.error for i in self.layers[0]]}")
                 self.forward_prop(self.data_set[j])
                 self.back_prop(self.labels[j])
-                self.update_weights(self.data_set[j])
+                self.update_weights(self.data_set[j], 1)
 
 
 data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
@@ -233,10 +233,10 @@ layers = {
     },
 }
 
-labels = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0]]
+labels = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 
-def output_to_file(name):
+def output_to_file(name, network):
     with open(name, 'w') as network_file:
         np.set_printoptions(precision=4, linewidth=1000)
         for layer_index, layer in enumerate(network.layers):
@@ -253,9 +253,7 @@ def output_to_file(name):
 
 network = Network(data_set, labels, layers)
 
-for i in network.layers[-1]:
-    print(f"Weights: {i.output}")
-network.train(2)
+network.train(100)
 for i in network.layers[-1]:
     print(f"Output: {i.output}")
 
