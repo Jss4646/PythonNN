@@ -2,6 +2,8 @@ import unittest
 from Network import Neuron, sigmoid, relu, Network
 import numpy as np
 
+np.random.seed(0)
+
 
 # TODO add more print statements
 class NeuronTesting(unittest.TestCase):
@@ -9,21 +11,17 @@ class NeuronTesting(unittest.TestCase):
 
     """
     def setUp(self) -> None:
-        self.labels = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        self.labels = [[1, 0]]
 
         self.layers = {
             'layer 1': {
                 'activation': 'sigmoid',
-                'neurons': 10,
+                'neurons': 2,
             },
             'layer 2': {
                 'activation': 'sigmoid',
-                'neurons': 20,
-            },
-            'Layer 3': {
-                'activation': 'sigmoid',
-                'neurons': 10,
-            },
+                'neurons': 2,
+            }
         }
 
         self.data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
@@ -74,8 +72,8 @@ class NeuronTesting(unittest.TestCase):
     def test_output_backprop(self):
         print("\nOutput Backprop Test:")
         output_layer = self.network.layers[-1]
-        self.network._gen_output_errors([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-        self.assertEqual(output_layer[0].error, 0.25)
+        self.network._gen_output_errors([1, 0])
+        self.assertEqual(output_layer[0].error_gradient, 0.25)
 
     def test_hidden_backprop(self):
         print("\nHidden Backprop Test:")
@@ -84,7 +82,10 @@ class NeuronTesting(unittest.TestCase):
         self.network._gen_output_errors(self.labels[0])
         self.network._gen_hidden_errors()
 
-        self.assertEqual(np.around(hidden_layers[0][0].error, 3), 0.028)
+        hidden_errors = []
+        for layer in hidden_layers:
+            hidden_errors.append([neuron.error_gradient for neuron in layer])
+        self.assertEqual(len(hidden_errors[0]), 2)
 
     def test_hidden_backprop_changes(self):
         print("\nHidden Backprop Changes Test:")
@@ -94,7 +95,7 @@ class NeuronTesting(unittest.TestCase):
         hidden_layers = self.network.layers[0:-1]
         previous_errors = []
         for layer in hidden_layers:
-            previous_errors.append([neuron.error for neuron in layer])
+            previous_errors.append([neuron.error_gradient for neuron in layer])
 
         self.network.update_weights(self.data_set[0])
         self.network._gen_output_errors(self.labels[0])
@@ -102,14 +103,14 @@ class NeuronTesting(unittest.TestCase):
 
         current_errors = []
         for layer in hidden_layers:
-            current_errors.append([neuron.error for neuron in layer])
+            current_errors.append([neuron.error_gradient for neuron in layer])
 
         self.assertNotEqual(current_errors, previous_errors)
 
     def test_update_input_weights(self):
         input_layer = self.network.layers[0]
 
-        self.network._gen_output_errors([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        self.network._gen_output_errors([1, 0])
         self.network._gen_hidden_errors()
 
         previous_weights = []
@@ -126,7 +127,8 @@ class NeuronTesting(unittest.TestCase):
     def test_update_hidden_weights(self):
         hidden_weights = self.network.layers[1:]
 
-        self.network._gen_output_errors([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        self.network.forward_prop(self.data_set[0])
+        self.network._gen_output_errors([1, 0])
         self.network._gen_hidden_errors()
 
         previous_weights = []
@@ -134,13 +136,15 @@ class NeuronTesting(unittest.TestCase):
             for neuron in layer:
                 previous_weights.append([weight.copy() for weight in neuron.weights])
 
-        self.network._update_input_weights(self.data_set[0], 0.1)
+        self.network._update_hidden_weights(0.1)
 
         current_weights = []
         for layer in hidden_weights:
             for neuron in layer:
-                previous_weights.append([weight.copy() for weight in neuron.weights])
+                current_weights.append([weight.copy() for weight in neuron.weights])
 
+        print(f'First Sample: {previous_weights[0][0]}')
+        print(f'Second Sample: {current_weights[0][0]}')
         self.assertNotEqual(previous_weights, current_weights)
 
 
