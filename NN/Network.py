@@ -274,10 +274,15 @@ class Network:
         Returns
         -------
         error : float
+            The error of the output layer
         """
         outputs = np.array([neuron.output for neuron in self.layers[-1]])
         self.error = 0.5 * np.sum((labels - outputs) ** 2)
         return self.error
+
+    def get_outputs(self):
+        outputs = [neuron.output for neuron in self.layers[-1]]
+        return outputs
 
     def train(self, epochs: int = 1, learning_rate: float = 0.1):
         for epoch in range(epochs):
@@ -297,21 +302,21 @@ class Network:
                         print(f"\t\t\t{index}: {neuron.output}")
 
                     network_outputs = [neuron.output for neuron in self.layers[-1]]
-                    print(f'\t\tLabel: {label.tolist().index(max(label))}  '
+                    print(f'\t\tLabel: {label.index(max(label))}   '
                           f'Guess: {network_outputs.index(max(network_outputs))}')
 
                     print(f"\t\tError {self.calculate_error(label)}\n")
                 data_index += 1
 
 
-data_set, raw_labels = loadlocal_mnist(
-    images_path='mnistDataset/train-images.idx3-ubyte',
-    labels_path='mnistDataset/train-labels.idx1-ubyte'
-)
-
-labels = np.zeros((len(raw_labels), 10))
-for raw_label, label in zip(raw_labels, labels):
-    label[raw_label - 1] = 1
+# data_set, raw_labels = loadlocal_mnist(
+#     images_path='mnistDataset/train-images.idx3-ubyte',
+#     labels_path='mnistDataset/train-labels.idx1-ubyte'
+# )
+#
+# labels = np.zeros((len(raw_labels), 10))
+# for raw_label, label in zip(raw_labels, labels):
+#     label[raw_label - 1] = 1
 
 layers = {
     'layer 1': {
@@ -327,9 +332,9 @@ layers = {
         'neurons': 10,
     },
 }
-np.random.seed(0)
-network = Network(data_set[0:200], labels[0:200], layers)
-network.train(1, 0.01)
+# np.random.seed(0)
+# network = Network(data_set[0:200], labels[0:200], layers)
+# network.train(1, 0.01)
 
 
 def output_to_file(name, network):

@@ -18,9 +18,10 @@ playPauseButton.addEventListener('mousedown', function (event) {
 
 playPauseButton.addEventListener('click', function (event) {
 
+    network.apiNetwork.addLayers(1, 10);
     const networkJSON = network.apiNetwork.layers;
 
-   fetch(`${window.origin}/setup-network`, {
+   fetch(`${window.origin}/start-training`, {
        method: "POST",
        credentials: "include",
        body: JSON.stringify(networkJSON),
