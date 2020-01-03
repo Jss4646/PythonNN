@@ -1,7 +1,7 @@
-from typing import List, Any
+from typing import List
 
 import numpy as np
-import random
+from mlxtend.data import loadlocal_mnist
 
 
 def sigmoid(x, derivative=False) -> float:
@@ -19,41 +19,40 @@ def relu(x, derivative=False) -> float:
 
 
 class Neuron:
-    """
-    A Network Neuron
-
-    Parameters
-    ----------
-    num_of_inputs : int, optional
-        Inputs from either the source image or a previous layer
-
-    activation_function : str-
-        Tells the node what activation type to use
-        Supported activation types:
-            -Sigmoid
-            -ReLU
-
-    Methods
-    ------
-    run(inputs=[0.12, 0.24])
-        Executes the neurons function
-
-    Examples
-    --------
-    >>> neuron1 = Neuron(4)
-    >>> neuron2 = Neuron(10, 'sigmoid')
-    >>> neuron3 = Neuron(2, 'relu')
-
-    References
-    ----------
-        See : http://neuralnetworksanddeeplearning.com/chap1.html#sigmoid_neurons
-              for the maths behind a Neuron
-
-        See : https://cs231n.github.io/neural-netwworks-2/#init
-            For network setup best practices
-    """
-
     def __init__(self, num_of_inputs: int, activation_function='sigmoid'):
+        """
+        A Network Neuron
+
+        Parameters
+        ----------
+        num_of_inputs : int, optional
+            Inputs from either the source image or a previous layer
+
+        activation_function : str-
+            Tells the node what activation type to use
+            Supported activation types:
+                -Sigmoid
+                -ReLU
+
+        Methods
+        ------
+        run(inputs=[0.12, 0.24])
+            Executes the neurons function
+
+        Examples
+        --------
+        >>> neuron1 = Neuron(4)
+        >>> neuron2 = Neuron(10, 'sigmoid')
+        >>> neuron3 = Neuron(2, 'relu')
+
+        References
+        ----------
+            See : http://neuralnetworksanddeeplearning.com/chap1.html#sigmoid_neurons
+                  for the maths behind a Neuron
+
+            See : https://cs231n.github.io/neural-netwworks-2/#init
+                For network setup best practices
+        """
         self.weights = 0.1 * np.random.standard_normal(num_of_inputs)
         self.bias = 0.0
         self.output = 0.0
@@ -113,10 +112,19 @@ class Network:
     Methods
     ------
     forward_prop
-        forward propagation function
+        passes the inputs through the network
 
     back_prop
-        back propagation function
+        generates the errors for each neuron
+
+    update_weights
+        updates the weights for each neuron
+
+    calculate_error
+        calculates the error for the output layer
+
+    train
+        trains the network
     """
 
     def __init__(self, data_set: list, labels: list, layers: dict):
@@ -131,39 +139,25 @@ class Network:
         for index, layer in enumerate(layers.values()):
             activation = layer['activation']
             num_of_neurons = layer['neurons']
-            layer_to_be_added = []
 
             if index == 0:
-                self._add_input_layers(
-                    activation,
-                    data_set,
-                    layer_to_be_added,
-                    num_of_neurons
-                )
+                layer_to_be_added = self._construct_layer(activation, len(data_set[0]), num_of_neurons)
             else:
-                self._add_hidden_layers(
-                    activation,
-                    layer_to_be_added,
-                    num_of_neurons,
-                    prev_num_of_neurons
-                )
+                layer_to_be_added = self._construct_layer(activation, prev_num_of_neurons, num_of_neurons)
 
             self.layers.append(layer_to_be_added)
             prev_num_of_neurons = num_of_neurons
 
     @staticmethod
-    def _add_input_layers(activation, data_set, layer_to_be_added, num_of_neurons):
+    def _construct_layer(activation, prev_layer_size, num_of_neurons):
+
+        layer_to_be_added = []
+
         for i in range(num_of_neurons):
-            input_layer_size = len(data_set[0])
-            neuron_to_be_added = Neuron(input_layer_size, activation)
+            neuron_to_be_added = Neuron(prev_layer_size, activation)
             layer_to_be_added.append(neuron_to_be_added)
 
-    @staticmethod
-    def _add_hidden_layers(activation, layer_to_be_added, num_of_neurons, prev_num_of_neurons):
-        for i in range(num_of_neurons):
-            layer_size = prev_num_of_neurons
-            neuron_to_be_added = Neuron(layer_size, activation)
-            layer_to_be_added.append(neuron_to_be_added)
+        return layer_to_be_added
 
     def forward_prop(self, data):
         """
@@ -207,7 +201,7 @@ class Network:
         output_layer_outputs = np.asarray([neuron.output for neuron in output_layer])
         labels = np.asarray(labels)
 
-        output_errors = (labels - output_layer_outputs) * sigmoid(output_layer_outputs, True)
+        output_errors = (labels - output_layer_outputs)
         for index, neuron in enumerate(output_layer):
             neuron.error_gradient = output_errors[index]
 
@@ -238,14 +232,14 @@ class Network:
         self._update_input_weights(data, learning_rate)
         self._update_hidden_weights(learning_rate)
 
-    def _update_input_weights(self, data, learning_rate):
+    def _update_input_weights(self, data: list, learning_rate: float):
         """Updates the input layer's weights"""
         input_layer = self.layers[0]
         for neuron in input_layer:
             for index, network_input in enumerate(data):
                 neuron.weights[index] += learning_rate * neuron.error_gradient * network_input
 
-    def _update_hidden_weights(self, learning_rate):
+    def _update_hidden_weights(self, learning_rate: float):
         """Updates the hidden layers weights"""
         hidden_layers = self.layers[1:]
         for index, layer in enumerate(hidden_layers):
@@ -268,38 +262,61 @@ class Network:
             for neuron in layer:
                 neuron.bias += learning_rate * neuron.error_gradient
 
-    def calculate_error(self):
+    def calculate_error(self, labels):
+        """
+        Calculate the sum error for the output layer
+
+        Parameters
+        ----------
+        labels : list
+            What the output of the network should be
+
+        Returns
+        -------
+        error : float
+        """
         outputs = np.array([neuron.output for neuron in self.layers[-1]])
-        self.error = 0.5 * np.sum((self.labels - outputs) ** 2)
+        self.error = 0.5 * np.sum((labels - outputs) ** 2)
         return self.error
 
     def train(self, epochs: int = 1, learning_rate: float = 0.1):
         for epoch in range(epochs):
-
-            if (epoch + 1) % 10 == 0 or epoch == 0:
-                print(f"Epoch {epoch + 1}")
-
+            print(f"Epoch {epoch + 1}")
+            data_index = 0
             for data, label in zip(self.data_set, self.labels):
-
-                data_index = 0
-
                 self.forward_prop(data)
                 self.back_prop(label)
                 self.update_weights(data, learning_rate)
                 self.update_biases(learning_rate)
 
-                if (epoch + 1) % 10 == 0 or epoch == 0:
+                if (data_index + 1) % 10 == 0 or data_index == 0:
                     print(f"\tData {data_index + 1}")
-                    print(f"\t\tError {self.calculate_error()}\n")
+
+                    print("\t\tOutputs:")
+                    for index, neuron in enumerate(self.layers[-1]):
+                        print(f"\t\t\t{index}: {neuron.output}")
+
+                    network_outputs = [neuron.output for neuron in self.layers[-1]]
+                    print(f'\t\tLabel: {label.tolist().index(max(label))}  '
+                          f'Guess: {network_outputs.index(max(network_outputs))}')
+
+                    print(f"\t\tError {self.calculate_error(label)}\n")
                 data_index += 1
 
 
-data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
+data_set, raw_labels = loadlocal_mnist(
+    images_path='mnistDataset/train-images.idx3-ubyte',
+    labels_path='mnistDataset/train-labels.idx1-ubyte'
+)
+
+labels = np.zeros((len(raw_labels), 10))
+for raw_label, label in zip(raw_labels, labels):
+    label[raw_label - 1] = 1
 
 layers = {
     'layer 1': {
         'activation': 'sigmoid',
-        'neurons': 20,
+        'neurons': 10,
     },
     'layer 2': {
         'activation': 'sigmoid',
@@ -308,10 +325,11 @@ layers = {
     'layer 3': {
         'activation': 'sigmoid',
         'neurons': 10,
-    }
+    },
 }
-
-labels = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+np.random.seed(0)
+network = Network(data_set[0:200], labels[0:200], layers)
+network.train(1, 0.01)
 
 
 def output_to_file(name, network):
@@ -327,11 +345,3 @@ def output_to_file(name, network):
             network_file.write('\n')
 
         network_file.write('\nNetwork output:')
-
-
-network = Network(data_set, labels, layers)
-
-network.train(1000, 0.1)
-for i in network.layers[-1]:
-    print(f"Output: {i.output}")
-print(f"\nError: {network.calculate_error()}")

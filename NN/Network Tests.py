@@ -73,7 +73,7 @@ class NeuronTesting(unittest.TestCase):
         print("\nOutput Backprop Test:")
         output_layer = self.network.layers[-1]
         self.network._gen_output_errors([1, 0])
-        self.assertEqual(output_layer[0].error_gradient, 0.25)
+        self.assertEqual(output_layer[0].error_gradient, 1)
 
     def test_hidden_backprop(self):
         print("\nHidden Backprop Test:")
