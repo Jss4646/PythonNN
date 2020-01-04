@@ -147,6 +147,10 @@ class NeuronTesting(unittest.TestCase):
         print(f'Second Sample: {current_weights[0][0]}')
         self.assertNotEqual(previous_weights, current_weights)
 
+    def test_get_layers(self):
+        output_layers = self.network.get_layers()
+        self.assertEqual(output_layers, self.layers)
+
 
 # TODO add tests for network
 if __name__ == '__main__':

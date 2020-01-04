@@ -159,6 +159,18 @@ class Network:
 
         return layer_to_be_added
 
+    def update_layers(self, new_layers: dict):
+        self.layers = []
+        self._initialise_layers(self.data_set, new_layers)
+
+    def get_layers(self):
+        layers_json = {}
+        for index, layer in enumerate(self.layers):
+            activation = layer[0].activation_function.__name__
+            num_of_neurons = len(layer)
+            layers_json[f'layer {index + 1}'] = {'activation': activation, 'neurons': num_of_neurons}
+        return layers_json
+
     def forward_prop(self, data):
         """
         Passes input data through the network
@@ -335,6 +347,8 @@ layers = {
 # np.random.seed(0)
 # network = Network(data_set[0:200], labels[0:200], layers)
 # network.train(1, 0.01)
+
+
 
 
 def output_to_file(name, network):

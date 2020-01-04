@@ -4,14 +4,27 @@
  * @param node
  */
 function addNodeInteraction(node) {
-    node.addEventListener('mouseenter', function (event) {
+    addHoverInteraction(node);
+    addNodeClickInteraction(node);
+}
+
+function addHoverInteraction(htmlElement) {
+    htmlElement.addEventListener('mouseenter', function (event) {
         event.target.classList.replace('no-hover', 'node-hover')
     });
 
-    node.addEventListener('mouseleave', function (event) {
+    htmlElement.addEventListener('mouseleave', function (event) {
         event.target.classList.replace('node-hover', 'no-hover')
     });
+}
 
+
+function addNodeClickInteraction(node) {
+    addNodeEventlistenerInteraction(node);
+    addNodeInformationInteraction();
+}
+
+function addNodeEventlistenerInteraction(node) {
     node.addEventListener('click', function (event) {
 
         event.target.classList.replace('node-hover', 'node-selected');
@@ -24,4 +37,8 @@ function addNodeInteraction(node) {
             }
         })
     });
+}
+
+function addNodeInformationInteraction() {
+
 }
