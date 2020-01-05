@@ -91,4 +91,8 @@ class apiNetwork {
             }
         }
     }
+
+    wipeLayers() {
+        this.layers = {}
+    }
 }

@@ -8,4 +8,16 @@ fetch(`${window.origin}/set-cookie`, {
    headers: new Headers({
        "content-type": "application/json"
    })
+}).then(function (response) {
+    response.text().then(function (strLayers) {
+        if (strLayers !== 'Set user Cookie') {
+            network.wipeLayers();
+            let layers = JSON.parse(strLayers);
+            for (let key in layers) {
+                let numOfNeurons = layers[key].neurons;
+                network.addLayers(1, numOfNeurons);
+            }
+            network.removeLayer(Object.keys(layers).length - 1);
+        }
+    })
 });

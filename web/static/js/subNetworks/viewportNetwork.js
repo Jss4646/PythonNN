@@ -135,4 +135,11 @@ class viewportNetwork {
         node.appendChild(nodeValue);
         return node;
     }
+
+    wipeLayers() {
+        let numOfLayers = this.layers.childElementCount;
+        for (let i = numOfLayers - 1; i > -1; i--) {
+            this.removeLayer(i)
+        }
+    }
 }

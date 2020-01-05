@@ -15,13 +15,13 @@ playPauseButton.addEventListener('click', function () {
     network.apiNetwork.addLayers(1, 10);
     const networkJSON = network.apiNetwork.layers;
 
-   fetch(`${window.origin}/start-training`, {
-       method: "POST",
-       credentials: "include",
-       body: JSON.stringify(networkJSON),
-       cache: "no-cache",
-       headers: new Headers({
-           "content-type": "application/json"
-       })
-   })
+    fetch(`${window.origin}/start-training`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(networkJSON),
+        cache: "no-cache",
+        headers: new Headers({
+            "content-type": "application/json"
+        })
+    })
 });

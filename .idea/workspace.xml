@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/js/loadNetwork.js" afterDir="false" />
+    <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="update and get layers added&#10;refactored node interaction and playPauseButton&#10;added loadNetwork along with network handling for multiple users">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NN/Network Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Network Tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NN/Network.py" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Network.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/static/js/eventListeners/nodeInteraction.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/eventListeners/nodeInteraction.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/static/js/loadNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/loadNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/static/js/network.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/network.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/static/js/subNetworks/apiNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/subNetworks/apiNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/static/js/subNetworks/controlNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/subNetworks/controlNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/static/js/subNetworks/viewportNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/subNetworks/viewportNetwork.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,7 +324,7 @@
       <workItem from="1578104831462" duration="187000" />
       <workItem from="1578148202286" duration="362000" />
       <workItem from="1578148577466" duration="71000" />
-      <workItem from="1578148677170" duration="5593000" />
+      <workItem from="1578148677170" duration="12562000" />
     </task>
     <task id="LOCAL-00001" summary="backprop update">
       <created>1570042557354</created>
@@ -416,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578084715283</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="update and get layers added&#10;refactored node interaction and playPauseButton&#10;added loadNetwork along with network handling for multiple users">
+      <created>1578159877570</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1578159877570</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,7 +457,8 @@
     <MESSAGE value="Added comments for network&#10;Cleaned up printing&#10;Working Backprop!" />
     <MESSAGE value="update printing&#10;Layer setup refactor" />
     <MESSAGE value="Runs on server" />
-    <option name="LAST_COMMIT_MESSAGE" value="Runs on server" />
+    <MESSAGE value="update and get layers added&#10;refactored node interaction and playPauseButton&#10;added loadNetwork along with network handling for multiple users" />
+    <option name="LAST_COMMIT_MESSAGE" value="update and get layers added&#10;refactored node interaction and playPauseButton&#10;added loadNetwork along with network handling for multiple users" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1009" y="522" key="#Deployment" timestamp="1577916035794">
@@ -497,54 +506,54 @@
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
     <state x="404" y="390" width="961" height="591" key="#xdebugger.evaluate/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576245666670" />
-    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2" timestamp="1578084714362">
+    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2" timestamp="1578178907974">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578084714362" />
+    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578178907974" />
     <state x="-1701" y="334" width="1426" height="944" key="CommitChangelistDialog2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854392271" />
     <state x="858" y="565" key="FileChooserDialogImpl" timestamp="1578104045326">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="858" y="565" key="FileChooserDialogImpl/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578104045326" />
-    <state width="2115" height="390" key="GridCell.Tab.0.bottom" timestamp="1578159601293">
+    <state width="1628" height="608" key="GridCell.Tab.0.bottom" timestamp="1578183810998">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2115" height="390" key="GridCell.Tab.0.bottom/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578159601293" />
+    <state width="1628" height="608" key="GridCell.Tab.0.bottom/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578183810998" />
     <state width="2518" height="384" key="GridCell.Tab.0.bottom/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417222" />
-    <state width="2115" height="390" key="GridCell.Tab.0.center" timestamp="1578159601293">
+    <state width="1628" height="608" key="GridCell.Tab.0.center" timestamp="1578183810998">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2115" height="390" key="GridCell.Tab.0.center/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578159601293" />
+    <state width="1628" height="608" key="GridCell.Tab.0.center/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578183810998" />
     <state width="2518" height="384" key="GridCell.Tab.0.center/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417221" />
-    <state width="2115" height="390" key="GridCell.Tab.0.left" timestamp="1578159601293">
+    <state width="1628" height="608" key="GridCell.Tab.0.left" timestamp="1578183810998">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2115" height="390" key="GridCell.Tab.0.left/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578159601293" />
+    <state width="1628" height="608" key="GridCell.Tab.0.left/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578183810998" />
     <state width="2518" height="384" key="GridCell.Tab.0.left/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417220" />
-    <state width="2115" height="390" key="GridCell.Tab.0.right" timestamp="1578159601293">
+    <state width="1628" height="608" key="GridCell.Tab.0.right" timestamp="1578183810998">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2115" height="390" key="GridCell.Tab.0.right/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578159601293" />
+    <state width="1628" height="608" key="GridCell.Tab.0.right/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578183810998" />
     <state width="2518" height="384" key="GridCell.Tab.0.right/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417221" />
-    <state width="2116" height="390" key="GridCell.Tab.1.bottom" timestamp="1578159601172">
+    <state width="2114" height="390" key="GridCell.Tab.1.bottom" timestamp="1578182340509">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2116" height="390" key="GridCell.Tab.1.bottom/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578159601172" />
+    <state width="2114" height="390" key="GridCell.Tab.1.bottom/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578182340509" />
     <state width="2518" height="685" key="GridCell.Tab.1.bottom/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199794" />
-    <state width="2116" height="390" key="GridCell.Tab.1.center" timestamp="1578159601172">
+    <state width="2114" height="390" key="GridCell.Tab.1.center" timestamp="1578182340509">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2116" height="390" key="GridCell.Tab.1.center/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578159601172" />
+    <state width="2114" height="390" key="GridCell.Tab.1.center/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578182340509" />
     <state width="2518" height="685" key="GridCell.Tab.1.center/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199793" />
-    <state width="2116" height="390" key="GridCell.Tab.1.left" timestamp="1578159601172">
+    <state width="2114" height="390" key="GridCell.Tab.1.left" timestamp="1578182340509">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2116" height="390" key="GridCell.Tab.1.left/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578159601172" />
+    <state width="2114" height="390" key="GridCell.Tab.1.left/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578182340509" />
     <state width="2518" height="685" key="GridCell.Tab.1.left/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199792" />
-    <state width="2116" height="390" key="GridCell.Tab.1.right" timestamp="1578159601172">
+    <state width="2114" height="390" key="GridCell.Tab.1.right" timestamp="1578182340509">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2116" height="390" key="GridCell.Tab.1.right/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578159601172" />
+    <state width="2114" height="390" key="GridCell.Tab.1.right/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578182340509" />
     <state width="2518" height="685" key="GridCell.Tab.1.right/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199793" />
     <state x="-1567" y="454" key="MultipleFileMergeDialog" timestamp="1576854352534">
       <screen x="-2560" y="23" width="2560" height="1417" />
@@ -608,7 +617,7 @@
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_update_input_weights.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_update_input_weights Coverage Results" MODIFIED="1577121729114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_hidden_backprop.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_hidden_backprop Coverage Results" MODIFIED="1577806563658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Network.coverage" NAME="Network Coverage Results" MODIFIED="1577919428866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
-    <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1578159601136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1578183810990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_update_hidden_weights.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_update_hidden_weights Coverage Results" MODIFIED="1577753283395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_update_output_weights.coverage" NAME=" Coverage Results" MODIFIED="1577118619420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_output_backprop.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_output_backprop Coverage Results" MODIFIED="1578071526364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />

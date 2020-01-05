@@ -31,7 +31,7 @@ def set_cookie():
     user_cookie = request.cookies.get('PythonNNSession')
     if user_cookie:
         user_network = user_networks[user_cookie]['network']
-        network_layers = user_network.get_layers()
+        network_layers = user_network.get_layers_json()
         return network_layers
     else:
         user_id = str(uuid.uuid4())
@@ -48,11 +48,12 @@ def set_cookie():
 def start_training():
     layers = request.get_json()
     user_id = request.cookies['PythonNNSession']
-    user_network = user_networks[user_id]['network']
 
-    user_network.update_layers(layers)
-    user_network.train()
-    return layers
+    new_user_network = Network(inputs[0:200], labels[0:200], layers)
+    user_networks[user_id]['network'] = new_user_network
+
+    new_user_network.train()
+    return 'Done Training!'
 
 
 if __name__ == '__main__':

@@ -74,6 +74,12 @@ class Network {
             console.log('The layer has to contain at least one node');
         }
     }
+
+    wipeLayers() {
+        this.controlNetwork.wipeLayers();
+        this.viewportNetwork.wipeLayers();
+        this.apiNetwork.wipeLayers();
+    }
 }
 
 const network = new Network();

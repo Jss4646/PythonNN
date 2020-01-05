@@ -163,12 +163,12 @@ class Network:
         self.layers = []
         self._initialise_layers(self.data_set, new_layers)
 
-    def get_layers(self):
+    def get_layers_json(self):
         layers_json = {}
         for index, layer in enumerate(self.layers):
             activation = layer[0].activation_function.__name__
             num_of_neurons = len(layer)
-            layers_json[f'layer {index + 1}'] = {'activation': activation, 'neurons': num_of_neurons}
+            layers_json[f'layer{index + 1}'] = {'activation': activation, 'neurons': num_of_neurons}
         return layers_json
 
     def forward_prop(self, data):
