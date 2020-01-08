@@ -51,36 +51,49 @@ def start_training(data):
     layers = data['data']
     user_id = request.cookies['PythonNNSession']
 
-    new_user_network = Network(inputs[0:200], labels[0:200], layers)
-    user_networks[user_id]['network'] = new_user_network
+    network = Network(inputs[0:200], labels[0:200], layers)
+    user_networks[user_id]['network'] = network
 
     epochs = 1
     learning_rate = 0.1
 
-    print(len(new_user_network.layers))
+    train_network(epochs, learning_rate, network)
+
+
+def train_network(epochs, learning_rate, network):
     for epoch in range(epochs):
         print(f"Epoch {epoch + 1}")
-        data_index = 0
-        for data, label in zip(new_user_network.data_set, new_user_network.labels):
-            new_user_network.forward_prop(data)
-            new_user_network.back_prop(label)
-            new_user_network.update_weights(data, learning_rate)
-            new_user_network.update_biases(learning_rate)
+        for index, (data, label) in enumerate(zip(network.data_set, network.labels)):
+            network.forward_prop(data)
+            network.back_prop(label)
+            network.update_weights(data, learning_rate)
+            network.update_biases(learning_rate)
 
-            if (data_index + 1) % 10 == 0 or data_index == 0:
-                print(f"\tData {data_index + 1}")
+            if index % 10 == 0 or index == 0:
+                network_outputs = [neuron.output for neuron in network.layers[-1]]
 
-                print("\t\tOutputs:")
-                for index, neuron in enumerate(new_user_network.layers[-1]):
-                    print(f"\t\t\t{index}: {neuron.output}")
+                print_network_details(index, label, network, network_outputs)
 
-                network_outputs = [neuron.output for neuron in new_user_network.layers[-1]]
-                print(f'\t\tLabel: {label.index(max(label))}   '
-                      f'Guess: {network_outputs.index(max(network_outputs))}')
+                # TODO make these available from the network
+                network_details = {
+                    'outputs': network_outputs,
+                    'networkDecision': network_outputs.index(max(network_outputs)),
+                    'label': label.index(max(label)),
+                    'epoch': epoch + 1,
+                }
+                emit('Network Outputs', network_details)
 
-                print(f"\t\tError {new_user_network.calculate_error(label)}\n")
-                emit('Network Outputs', {'outputs': network_outputs})
-            data_index += 1
+
+def print_network_details(index, label, network, network_outputs):
+    print(f"\tData {index}")
+    print("\t\tOutputs:")
+
+    for index, neuron in enumerate(network.layers[-1]):
+        print(f"\t\t\t{index}: {neuron.output}")
+
+    print(f'\t\tLabel: {label.index(max(label))}   '
+          f'Guess: {network_outputs.index(max(network_outputs))}')
+    print(f"\t\tError {network.calculate_error(label)}\n")
 
 
 if __name__ == '__main__':

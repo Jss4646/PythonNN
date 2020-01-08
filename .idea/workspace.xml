@@ -4,12 +4,10 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="update and get layers added&#10;refactored node interaction and playPauseButton&#10;added loadNetwork along with network handling for multiple users">
+    <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/static/js/loadNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/loadNetwork.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/templates/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,14 +33,14 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.45984364">
+    <splitter split-orientation="horizontal" split-proportion="0.41364604">
       <split-first>
         <leaf>
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/web/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="44">
-                  <caret line="59" column="38" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+                <state relative-caret-position="568">
+                  <caret line="94" column="66" lean-forward="true" selection-start-line="94" selection-start-column="66" selection-end-line="94" selection-end-column="66" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
                   </folding>
@@ -66,8 +64,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="109">
-                  <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+                <state relative-caret-position="296">
+                  <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
                 </state>
               </provider>
             </entry>
@@ -75,8 +73,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/web/templates/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="344">
-                  <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+                <state relative-caret-position="242">
+                  <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
@@ -101,8 +99,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/web/static/js/loadNetwork.js" />
-        <option value="$PROJECT_DIR$/web/templates/index.html" />
         <option value="$PROJECT_DIR$/web/test_server.py" />
+        <option value="$PROJECT_DIR$/web/templates/index.html" />
         <option value="$PROJECT_DIR$/web/app.py" />
         <option value="$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js" />
       </list>
@@ -454,7 +452,7 @@
       <workItem from="1578148202286" duration="362000" />
       <workItem from="1578148577466" duration="71000" />
       <workItem from="1578148677170" duration="12562000" />
-      <workItem from="1578314049490" duration="9453000" />
+      <workItem from="1578314049490" duration="13332000" />
     </task>
     <task id="LOCAL-00001" summary="backprop update">
       <created>1570042557354</created>
@@ -554,18 +552,25 @@
       <option name="project" value="LOCAL" />
       <updated>1578159877570</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Updating front end outputs works">
+      <created>1578478254706</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1578478254706</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9453000" />
+    <option name="totallyTimeSpent" value="13332000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -575,7 +580,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3290461" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3762058" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3762058" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39978564" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -661,7 +666,8 @@
     <MESSAGE value="update printing&#10;Layer setup refactor" />
     <MESSAGE value="Runs on server" />
     <MESSAGE value="update and get layers added&#10;refactored node interaction and playPauseButton&#10;added loadNetwork along with network handling for multiple users" />
-    <option name="LAST_COMMIT_MESSAGE" value="update and get layers added&#10;refactored node interaction and playPauseButton&#10;added loadNetwork along with network handling for multiple users" />
+    <MESSAGE value="Updating front end outputs works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating front end outputs works" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1009" y="522" key="#Deployment" timestamp="1577916035794">
@@ -803,11 +809,6 @@
           <line>82</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/web/app.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -825,7 +826,7 @@
     <SUITE FILE_PATH="coverage/PythonNN$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1577921343936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_network_backprop.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_network_backprop Coverage Results" MODIFIED="1577056087523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_hidden_backprop.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_hidden_backprop Coverage Results" MODIFIED="1577806563658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
-    <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1578478176747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1578481573766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting.coverage" NAME="Unittests for Network Tests.NeuronTesting Coverage Results" MODIFIED="1576244577364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Flask__web_test_server_py_.coverage" NAME="Flask (web/test_server.py) Coverage Results" MODIFIED="1578475829745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_hidden_backprop_changes.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_hidden_backprop_changes Coverage Results" MODIFIED="1577116952257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
@@ -879,13 +880,6 @@
         <state relative-caret-position="-10" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/static/js/loadNetwork.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -893,10 +887,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="59" column="38" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+        <state relative-caret-position="568">
+          <caret line="94" column="66" lean-forward="true" selection-start-line="94" selection-start-column="66" selection-end-line="94" selection-end-column="66" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -905,8 +906,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="296">
+          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
         </state>
       </provider>
     </entry>

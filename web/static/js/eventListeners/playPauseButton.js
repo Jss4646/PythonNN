@@ -22,6 +22,9 @@ playPauseButton.addEventListener('click', function () {
     });
 
     let frontend_outputs = document.querySelectorAll('.output-neurons li');
+    let frontend_decision = document.querySelector('#decision');
+    let frontend_label = document.querySelector('#actual');
+    let frontend_epoch = document.querySelector('#epoch');
 
     socket.on('Network Outputs', function (data) {
         for (let i = 0; i < data.outputs.length; i++) {
@@ -29,5 +32,8 @@ playPauseButton.addEventListener('click', function () {
             let output = Math.round(data.outputs[i] * decimalPoints) / decimalPoints;
             frontend_outputs[i].innerText = `${i}: ${output}`
         }
+        frontend_decision.innerText = data.networkDecision;
+        frontend_label.innerText = data.label;
+        frontend_epoch.innerText = data.epoch;
     })
 });
