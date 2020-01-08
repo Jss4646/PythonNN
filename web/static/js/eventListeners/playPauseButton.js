@@ -21,19 +21,19 @@ playPauseButton.addEventListener('click', function () {
         data: networkJSON
     });
 
-    let frontend_outputs = document.querySelectorAll('.output-neurons li');
-    let frontend_decision = document.querySelector('#decision');
-    let frontend_label = document.querySelector('#actual');
-    let frontend_epoch = document.querySelector('#epoch');
+    let frontendOutputs = document.querySelectorAll('.output-neurons li');
+    let frontendDecision = document.querySelector('#decision');
+    let frontendLabel = document.querySelector('#actual');
+    let frontendEpoch = document.querySelector('#epoch');
 
     socket.on('Network Outputs', function (data) {
         for (let i = 0; i < data.outputs.length; i++) {
             let decimalPoints = 10 ** 5;
             let output = Math.round(data.outputs[i] * decimalPoints) / decimalPoints;
-            frontend_outputs[i].innerText = `${i}: ${output}`
+            frontendOutputs[i].innerText = `${i}: ${output}`
         }
-        frontend_decision.innerText = data.networkDecision;
-        frontend_label.innerText = data.label;
-        frontend_epoch.innerText = data.epoch;
+        frontendDecision.innerText = data.networkDecision;
+        frontendLabel.innerText = data.label;
+        frontendEpoch.innerText = data.epoch;
     })
 });
