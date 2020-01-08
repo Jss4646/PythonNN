@@ -62,16 +62,16 @@
             Changing of output values
          -->
         <div class="output-neurons">
-            <li>0: 0.002</li>
-            <li>1: 0.012</li>
-            <li>2: 0.981</li>
-            <li>3: 0.001</li>
-            <li>4: 0.056</li>
-            <li>5: 0.100</li>
-            <li>6: 0.022</li>
-            <li>7: 0.067</li>
-            <li>8: 0.023</li>
-            <li>9: 0.025</li>
+            <li>0: 0.0000</li>
+            <li>1: 0.0000</li>
+            <li>2: 0.0000</li>
+            <li>3: 0.0000</li>
+            <li>4: 0.0000</li>
+            <li>5: 0.0000</li>
+            <li>6: 0.0000</li>
+            <li>7: 0.0000</li>
+            <li>8: 0.0000</li>
+            <li>9: 0.0000</li>
         </div>
 
         <!--
@@ -88,16 +88,16 @@
         <div class="NN-info">
 
             <li>Decision</li>
-            <li id="decision">2</li>
+            <li id="decision">0</li>
 
             <li>Actual</li>
-            <li id="actual">2</li>
+            <li id="actual">0</li>
 
             <li># correct %</li>
-            <li id="%correct">97.2</li>
+            <li id="%correct">0</li>
 
-            <li>Epochs</li>
-            <li id="epochs">78</li>
+            <li>Epoch</li>
+            <li id="epoch">0</li>
 
         </div>
 
@@ -174,6 +174,8 @@
 </div>
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+
 <script src="{{ url_for('static', filename = 'js/eventListeners/nodeInteraction.js') }}"></script>
 <script src="{{ url_for('static', filename = 'js/eventListeners/controlNetworkButtonInteraction.js') }}"></script>
 <script src="{{ url_for('static', filename = 'js/eventListeners/playPauseButton.js') }}"></script>

@@ -1,11 +1,13 @@
 import uuid
 import numpy as np
 from flask import Flask, render_template, request, make_response
+from flask_socketio import SocketIO, emit
 from Network import Network
 from mlxtend.data import loadlocal_mnist
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'temp'
+socketio = SocketIO(app)
 
 inputs, raw_labels = loadlocal_mnist(
     images_path='NN/mnistDataset/train-images.idx3-ubyte',
@@ -27,9 +29,8 @@ def home():
 
 @app.route('/set-cookie', methods=['POST'])
 def set_cookie():
-    # TODO handel cookies that were before reset
     user_cookie = request.cookies.get('PythonNNSession')
-    if user_cookie:
+    if user_cookie and user_cookie in user_networks:
         user_network = user_networks[user_cookie]['network']
         network_layers = user_network.get_layers_json()
         return network_layers
@@ -44,17 +45,43 @@ def set_cookie():
         return res
 
 
-@app.route('/start-training', methods=['POST'])
-def start_training():
-    layers = request.get_json()
+@socketio.on('start training')
+def start_training(data):
+    print('started')
+    layers = data['data']
     user_id = request.cookies['PythonNNSession']
 
     new_user_network = Network(inputs[0:200], labels[0:200], layers)
     user_networks[user_id]['network'] = new_user_network
 
-    new_user_network.train()
-    return 'Done Training!'
+    epochs = 1
+    learning_rate = 0.1
+
+    print(len(new_user_network.layers))
+    for epoch in range(epochs):
+        print(f"Epoch {epoch + 1}")
+        data_index = 0
+        for data, label in zip(new_user_network.data_set, new_user_network.labels):
+            new_user_network.forward_prop(data)
+            new_user_network.back_prop(label)
+            new_user_network.update_weights(data, learning_rate)
+            new_user_network.update_biases(learning_rate)
+
+            if (data_index + 1) % 10 == 0 or data_index == 0:
+                print(f"\tData {data_index + 1}")
+
+                print("\t\tOutputs:")
+                for index, neuron in enumerate(new_user_network.layers[-1]):
+                    print(f"\t\t\t{index}: {neuron.output}")
+
+                network_outputs = [neuron.output for neuron in new_user_network.layers[-1]]
+                print(f'\t\tLabel: {label.index(max(label))}   '
+                      f'Guess: {network_outputs.index(max(network_outputs))}')
+
+                print(f"\t\tError {new_user_network.calculate_error(label)}\n")
+                emit('Network Outputs', {'outputs': network_outputs})
+            data_index += 1
 
 
 if __name__ == '__main__':
-    app.run()
+    socketio.run(app)

@@ -12,16 +12,22 @@ playPauseButton.addEventListener('mousedown', function (event) {
 
 playPauseButton.addEventListener('click', function () {
 
+    const socket = io.connect(`${window.origin}`);
+
     network.apiNetwork.addLayers(1, 10);
     const networkJSON = network.apiNetwork.layers;
 
-    fetch(`${window.origin}/start-training`, {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(networkJSON),
-        cache: "no-cache",
-        headers: new Headers({
-            "content-type": "application/json"
-        })
+    socket.emit('start training', {
+        data: networkJSON
+    });
+
+    let frontend_outputs = document.querySelectorAll('.output-neurons li');
+
+    socket.on('Network Outputs', function (data) {
+        for (let i = 0; i < data.outputs.length; i++) {
+            let decimalPoints = 10 ** 5;
+            let output = Math.round(data.outputs[i] * decimalPoints) / decimalPoints;
+            frontend_outputs[i].innerText = `${i}: ${output}`
+        }
     })
 });
