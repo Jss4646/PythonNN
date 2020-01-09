@@ -27,22 +27,24 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/set-cookie', methods=['POST'])
-def set_cookie():
+@app.route('/setup-user', methods=['POST'])
+def setup_user():
     user_cookie = request.cookies.get('PythonNNSession')
     if user_cookie and user_cookie in user_networks:
         user_network = user_networks[user_cookie]['network']
         network_layers = user_network.get_layers_json()
         return network_layers
     else:
-        user_id = str(uuid.uuid4())
+        return set_cookie()
 
-        layers = request.get_json()
-        user_networks[user_id] = {'network': Network(inputs[0:200], labels[0:200], layers)}
 
-        res = make_response('Set user Cookie')
-        res.set_cookie('PythonNNSession', user_id, max_age=60 * 60 * 24 * 365 * 2)
-        return res
+def set_cookie():
+    user_id = str(uuid.uuid4())
+    layers = request.get_json()
+    user_networks[user_id] = {'network': Network(inputs[0:10], labels[0:10], layers)}
+    res = make_response('Set user Cookie')
+    res.set_cookie('PythonNNSession', user_id, max_age=60 * 60 * 24 * 365 * 2)
+    return res
 
 
 @socketio.on('start training')
@@ -51,10 +53,10 @@ def start_training(data):
     layers = data['data']
     user_id = request.cookies['PythonNNSession']
 
-    network = Network(inputs[0:200], labels[0:200], layers)
+    network = Network(inputs[0:10], labels[0:10], layers)
     user_networks[user_id]['network'] = network
 
-    epochs = 1
+    epochs = 500
     learning_rate = 0.1
 
     train_network(epochs, learning_rate, network)
@@ -69,7 +71,7 @@ def train_network(epochs, learning_rate, network):
             network.update_weights(data, learning_rate)
             network.update_biases(learning_rate)
 
-            if index % 10 == 0 or index == 0:
+            if index % 1 == 0 or index == 0:
                 network_outputs = [neuron.output for neuron in network.layers[-1]]
 
                 print_network_details(index, label, network, network_outputs)

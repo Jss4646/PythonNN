@@ -1,6 +1,6 @@
 const networkJSON = network.apiNetwork.layers;
 
-fetch(`${window.origin}/set-cookie`, {
+fetch(`${window.origin}/setup-user`, {
     method: "POST",
    credentials: "include",
    body: JSON.stringify(networkJSON),
