@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gcloudignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/static/js/loadNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/loadNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,14 +73,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jacks\.PyCharm2019.3\config\scratches" />
-      <recent name="C:\Users\jacks\Documents\Coding\Python\PythonNN\web\static" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jacks\Documents\Coding\Python\PythonNN\web\static" />
       <recent name="C:\Users\jacks\Documents\Coding\Python\PythonNN\web" />
       <recent name="C:\Users\jacks\Documents\Coding\Python\PythonNN\web\static\css" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Computer Science\Coding\Python\PythonNN" />
+      <recent name="C:\Users\jacks\.PyCharm2019.3\config\scratches" />
+      <recent name="C:\Users\jacks\Documents\Coding\Python\PythonNN\web\static" />
     </key>
   </component>
   <component name="RunManager" selected="Flask server.PythonNN">
@@ -325,7 +323,7 @@
       <workItem from="1578148677170" duration="12562000" />
       <workItem from="1578314049490" duration="14398000" />
       <workItem from="1578517107246" duration="2964000" />
-      <workItem from="1578596224510" duration="713000" />
+      <workItem from="1578596224510" duration="1287000" />
     </task>
     <task id="LOCAL-00001" summary="backprop update">
       <created>1570042557354</created>
@@ -439,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578482266295</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="update cookie methods&#10;add gcloud support">
+      <created>1578596966645</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1578596966645</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -489,7 +494,8 @@
     <MESSAGE value="update and get layers added&#10;refactored node interaction and playPauseButton&#10;added loadNetwork along with network handling for multiple users" />
     <MESSAGE value="Updating front end outputs works" />
     <MESSAGE value="Frontend info updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Frontend info updates" />
+    <MESSAGE value="update cookie methods&#10;add gcloud support" />
+    <option name="LAST_COMMIT_MESSAGE" value="update cookie methods&#10;add gcloud support" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1009" y="522" key="#Deployment" timestamp="1577916035794">
@@ -538,10 +544,10 @@
     </state>
     <state x="1067" y="427" key="#xdebugger.evaluate/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578517506252" />
     <state x="404" y="390" width="961" height="591" key="#xdebugger.evaluate/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576245666670" />
-    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2" timestamp="1578178907974">
+    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2" timestamp="1578596965270">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578178907974" />
+    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578596965270" />
     <state x="-1701" y="334" width="1426" height="944" key="CommitChangelistDialog2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854392271" />
     <state x="858" y="565" key="FileChooserDialogImpl" timestamp="1578104045326">
       <screen x="0" y="0" width="2560" height="1410" />
@@ -595,10 +601,10 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="747" y="333" key="SettingsEditor/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578148757782" />
-    <state x="880" y="446" key="Vcs.Push.Dialog.v2" timestamp="1578074375615">
+    <state x="880" y="446" key="Vcs.Push.Dialog.v2" timestamp="1578596968350">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="880" y="446" key="Vcs.Push.Dialog.v2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578074375615" />
+    <state x="880" y="446" key="Vcs.Push.Dialog.v2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578596968350" />
     <state x="-1680" y="471" key="Vcs.Push.Dialog.v2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854395970" />
     <state x="976" y="529" key="com.intellij.ide.util.TipDialog" timestamp="1578596316600">
       <screen x="0" y="0" width="2560" height="1410" />
