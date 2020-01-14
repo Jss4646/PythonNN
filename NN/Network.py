@@ -320,7 +320,7 @@ class Network:
                     print(f"\t\tError {self.calculate_error(label)}\n")
                 data_index += 1
 
-
+#
 # data_set, raw_labels = loadlocal_mnist(
 #     images_path='mnistDataset/train-images.idx3-ubyte',
 #     labels_path='mnistDataset/train-labels.idx1-ubyte'
