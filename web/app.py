@@ -52,6 +52,8 @@ def start_training(data):
     print('started')
     layers = data['data']
     user_id = request.cookies['PythonNNSession']
+    print(f'User ID: {user_id}')
+    print(f'Layers: {layers}')
 
     network = Network(inputs[0:10], labels[0:10], layers)
     user_networks[user_id]['network'] = network
@@ -72,7 +74,7 @@ def train_network(network):
             if index % 10 == 0 or index == 0:
                 network_outputs = [neuron.output for neuron in network.layers[-1]]
 
-                print_network_details(index, label, network, network_outputs)
+                # print_network_details(index, label, network, network_outputs)
                 send_network_data(epoch, label, network_outputs)
 
 
