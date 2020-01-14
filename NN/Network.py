@@ -134,6 +134,9 @@ class Network:
         self.error = None
         self._initialise_layers(data_set, layers)
 
+        self.learning_rate = 0.1
+        self.num_of_epochs = 1
+
     def _initialise_layers(self, data_set, layers):
         prev_num_of_neurons = 0
         for index, layer in enumerate(layers.values()):
@@ -228,7 +231,7 @@ class Network:
                 neuron.error_gradient = error
         self.layers.reverse()
 
-    def update_weights(self, data, learning_rate=0.1):
+    def update_weights(self, data):
         """
         Uses the error from each neuron to calculate the amount to adjust the weight by
 
@@ -241,26 +244,26 @@ class Network:
             The learning rate for the network
             See Also: https://en.wikipedia.org/wiki/Learning_rate
         """
-        self._update_input_weights(data, learning_rate)
-        self._update_hidden_weights(learning_rate)
+        self._update_input_weights(data)
+        self._update_hidden_weights()
 
-    def _update_input_weights(self, data: list, learning_rate: float):
+    def _update_input_weights(self, data: list):
         """Updates the input layer's weights"""
         input_layer = self.layers[0]
         for neuron in input_layer:
             for index, network_input in enumerate(data):
-                neuron.weights[index] += learning_rate * neuron.error_gradient * network_input
+                neuron.weights[index] += self.learning_rate * neuron.error_gradient * network_input
 
-    def _update_hidden_weights(self, learning_rate: float):
+    def _update_hidden_weights(self):
         """Updates the hidden layers weights"""
         hidden_layers = self.layers[1:]
         for index, layer in enumerate(hidden_layers):
             next_layer_outputs = [neuron.output for neuron in self.layers[index]]
             for neuron in layer:
                 for neuron_index, next_layer_output in enumerate(next_layer_outputs):
-                    neuron.weights[neuron_index] += learning_rate * neuron.error_gradient * next_layer_output
+                    neuron.weights[neuron_index] += self.learning_rate * neuron.error_gradient * next_layer_output
 
-    def update_biases(self, learning_rate=0.1):
+    def update_biases(self):
         """
         Updates all the biases in the network
 
@@ -272,7 +275,7 @@ class Network:
         """
         for layer in self.layers:
             for neuron in layer:
-                neuron.bias += learning_rate * neuron.error_gradient
+                neuron.bias += self.learning_rate * neuron.error_gradient
 
     def calculate_error(self, labels):
         """
@@ -296,15 +299,15 @@ class Network:
         outputs = [neuron.output for neuron in self.layers[-1]]
         return outputs
 
-    def train(self, epochs: int = 1, learning_rate: float = 0.1):
-        for epoch in range(epochs):
+    def train(self):
+        for epoch in range(self.num_of_epochs):
             print(f"Epoch {epoch + 1}")
             data_index = 0
             for data, label in zip(self.data_set, self.labels):
                 self.forward_prop(data)
                 self.back_prop(label)
-                self.update_weights(data, learning_rate)
-                self.update_biases(learning_rate)
+                self.update_weights(data)
+                self.update_biases()
 
                 if (data_index + 1) % 10 == 0 or data_index == 0:
                     print(f"\tData {data_index + 1}")

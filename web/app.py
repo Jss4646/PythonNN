@@ -53,37 +53,45 @@ def start_training(data):
     layers = data['data']
     user_id = request.cookies['PythonNNSession']
 
-    network = Network(inputs[0:1], labels[0:1], layers)
+    network = Network(inputs[0:10], labels[0:10], layers)
     user_networks[user_id]['network'] = network
 
-    epochs = 50
-    learning_rate = 0.1
+    network.num_of_epochs = 50
+    network.learning_rate = 0.1
 
-    train_network(epochs, learning_rate, network)
+    train_network(network)
 
 
-def train_network(epochs, learning_rate, network):
-    for epoch in range(epochs):
+def train_network(network):
+    for epoch in range(network.num_of_epochs):
         print(f"Epoch {epoch + 1}")
         for index, (data, label) in enumerate(zip(network.data_set, network.labels)):
-            network.forward_prop(data)
-            network.back_prop(label)
-            network.update_weights(data, learning_rate)
-            network.update_biases(learning_rate)
+
+            propagate_network(data, label, network)
 
             if index % 10 == 0 or index == 0:
                 network_outputs = [neuron.output for neuron in network.layers[-1]]
 
                 print_network_details(index, label, network, network_outputs)
+                send_network_data(epoch, label, network_outputs)
 
-                # TODO make these available from the network
-                network_details = {
-                    'outputs': network_outputs,
-                    'networkDecision': network_outputs.index(max(network_outputs)),
-                    'label': label.index(max(label)),
-                    'epoch': epoch + 1,
-                }
-                emit('Network Outputs', network_details)
+
+def propagate_network(data, label, network):
+    network.forward_prop(data)
+    network.back_prop(label)
+    network.update_weights(data)
+    network.update_biases()
+
+
+def send_network_data(epoch, label, network_outputs):
+    # TODO make these available from the network
+    network_details = {
+        'outputs': network_outputs,
+        'networkDecision': network_outputs.index(max(network_outputs)),
+        'label': label.index(max(label)),
+        'epoch': epoch + 1,
+    }
+    emit('Network Outputs', network_details)
 
 
 def print_network_details(index, label, network, network_outputs):

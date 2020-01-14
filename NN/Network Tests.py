@@ -117,7 +117,7 @@ class NeuronTesting(unittest.TestCase):
         for neuron in input_layer:
             previous_weights.append([weight.copy() for weight in neuron.weights])
 
-        self.network._update_input_weights(self.data_set[0], 0.1)
+        self.network._update_input_weights(self.data_set[0])
 
         current_weights = []
         for neuron in input_layer:
@@ -136,7 +136,7 @@ class NeuronTesting(unittest.TestCase):
             for neuron in layer:
                 previous_weights.append([weight.copy() for weight in neuron.weights])
 
-        self.network._update_hidden_weights(0.1)
+        self.network._update_hidden_weights()
 
         current_weights = []
         for layer in hidden_weights:
