@@ -127,24 +127,23 @@ class Network:
         trains the network
     """
 
-    def __init__(self, data_set: list, labels: list, layers: dict):
+    def __init__(self, input_array_length: int, layers: dict):
         self.layers: List[List[Neuron]] = []
-        self.labels = labels
-        self.data_set = data_set
         self.error = None
-        self._initialise_layers(data_set, layers)
 
-        self.learning_rate = 0.1
         self.num_of_epochs = 1
+        self.learning_rate = 0.1
 
-    def _initialise_layers(self, data_set, layers):
+        self._initialise_layers(input_array_length, layers)
+
+    def _initialise_layers(self, input_array_length, layers):
         prev_num_of_neurons = 0
         for index, layer in enumerate(layers.values()):
             activation = layer['activation']
             num_of_neurons = layer['neurons']
 
             if index == 0:
-                layer_to_be_added = self._construct_layer(activation, len(data_set[0]), num_of_neurons)
+                layer_to_be_added = self._construct_layer(activation, input_array_length, num_of_neurons)
             else:
                 layer_to_be_added = self._construct_layer(activation, prev_num_of_neurons, num_of_neurons)
 
@@ -162,9 +161,9 @@ class Network:
 
         return layer_to_be_added
 
-    def update_layers(self, new_layers: dict):
+    def update_layers(self, input_array_length: int, new_layers: dict):
         self.layers = []
-        self._initialise_layers(self.data_set, new_layers)
+        self._initialise_layers(input_array_length, new_layers)
 
     def get_layers_json(self):
         layers_json = {}
@@ -237,12 +236,8 @@ class Network:
 
         Parameters
         ----------
-        data : list
+        data : list-
             The input data for the network
-
-        learning_rate : float
-            The learning rate for the network
-            See Also: https://en.wikipedia.org/wiki/Learning_rate
         """
         self._update_input_weights(data)
         self._update_hidden_weights()

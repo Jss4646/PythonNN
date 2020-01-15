@@ -19,6 +19,9 @@ for raw_label, label in zip(raw_labels, labels):
     label[raw_label - 1] = 1
 labels = labels.tolist()
 
+inputs = inputs[0:10]
+labels = labels[0:10]
+
 user_networks = {}
 
 
@@ -41,7 +44,11 @@ def setup_user():
 def set_cookie():
     user_id = str(uuid.uuid4())
     layers = request.get_json()
-    user_networks[user_id] = {'network': Network(inputs[0:10], labels[0:10], layers)}
+    user_networks[user_id] = {
+        'network': Network(len(inputs[0]), layers),
+        'dataSet': Rememberable(inputs, labels),
+        'pause': False,
+    }
     res = make_response('Set user Cookie')
     res.set_cookie('PythonNNSession', user_id, max_age=60 * 60 * 24 * 365 * 2)
     return res
@@ -55,26 +62,27 @@ def start_training(data):
     print(f'User ID: {user_id}')
     print(f'Layers: {layers}')
 
-    network = Network(inputs[0:10], labels[0:10], layers)
+    network = Network(len(inputs[0]), layers)
     user_networks[user_id]['network'] = network
+    data_set = user_networks[user_id]['dataSet']
 
     network.num_of_epochs = 50
     network.learning_rate = 0.1
 
-    train_network(network)
+    train_network(network, data_set)
 
 
-def train_network(network):
+def train_network(network, data_set):
     for epoch in range(network.num_of_epochs):
         print(f"Epoch {epoch + 1}")
-        for index, (data, label) in enumerate(zip(network.data_set, network.labels)):
+        for index, (data, label) in data_set:
 
             propagate_network(data, label, network)
 
             if index % 10 == 0 or index == 0:
-                network_outputs = [neuron.output for neuron in network.layers[-1]]
+                network_outputs = network.get_outputs()
 
-                # print_network_details(index, label, network, network_outputs)
+                print_network_details(index, label, network, network_outputs)
                 send_network_data(epoch, label, network_outputs)
 
 
@@ -110,3 +118,25 @@ def print_network_details(index, label, network, network_outputs):
 
 if __name__ == '__main__':
     socketio.run(app)
+
+
+class Rememberable:
+    def __init__(self, source1, source2):
+        self.index = 0
+        self.source1, self.source2 = source1, source2
+        self.source = zip(source1, source2)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index != len(self.source1):
+            item1 = self.source1[self.index]
+            item2 = self.source2[self.index]
+
+            output = (self.index, (item1, item2))
+            self.index += 1
+            return output
+        else:
+            self.index = 0
+            raise StopIteration

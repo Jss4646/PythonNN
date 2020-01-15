@@ -26,7 +26,7 @@ class NeuronTesting(unittest.TestCase):
 
         self.data_set = [[0.2, 0.41, 0.42, 0.11, 0.52]]
 
-        self.network = Network(self.data_set, self.labels, self.layers)
+        self.network = Network(len(self.data_set[0]), self.layers)
 
         self.neuron_inputs = [[0.23, 0.51, 0.24, 0.12], [], [1, -5, -200000, 2]]
         self.neuron_activations = ['sigmoid', 'sigmoid', 'relu']
