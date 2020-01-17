@@ -272,6 +272,14 @@ class Network:
             for neuron in layer:
                 neuron.bias += self.learning_rate * neuron.error_gradient
 
+    def add_layer(self, num_of_neurons, activation_type='sigmoid'):
+        previous_layer_size = len(self.layers[-1])
+        new_layer = self._construct_layer(activation_type, previous_layer_size, num_of_neurons)
+        self.layers.append(new_layer)
+
+    def remove_layer(self, index):
+        del self.layers[index]
+
     def calculate_error(self, labels):
         """
         Calculate the sum error for the output layer

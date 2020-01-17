@@ -17,7 +17,6 @@ fetch(`${window.origin}/setup-user`, {
                 let numOfNeurons = layers[key].neurons;
                 network.addLayers(1, numOfNeurons);
             }
-            network.removeLayer(Object.keys(layers).length - 1);
         }
     })
 });

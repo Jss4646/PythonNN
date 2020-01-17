@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, make_response
 from flask_socketio import SocketIO, emit
 from Network import Network
 from mlxtend.data import loadlocal_mnist
+import ast
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'temp'
@@ -22,7 +23,7 @@ labels = labels.tolist()
 inputs = inputs[0:10]
 labels = labels[0:10]
 
-user_networks = {}
+users = {}
 
 
 @app.route('/')
@@ -33,57 +34,87 @@ def home():
 @app.route('/setup-user', methods=['POST'])
 def setup_user():
     user_cookie = request.cookies.get('PythonNNSession')
-    if user_cookie and user_cookie in user_networks:
-        user_network = user_networks[user_cookie]['network']
+    if user_cookie and user_cookie in users:
+        user_network = users[user_cookie]['network']
         network_layers = user_network.get_layers_json()
         return network_layers
     else:
-        return set_cookie()
+        return add_user()
 
 
-def set_cookie():
+def add_user():
     user_id = str(uuid.uuid4())
+    add_user_to_users(user_id)
+
+    cookie_data = {'userId': user_id, 'pauseState': 'firstPlay'}
+    return create_user_cookie(cookie_data)
+
+
+def add_user_to_users(user_id):
     layers = request.get_json()
-    user_networks[user_id] = {
+    users[user_id] = {
         'network': Network(len(inputs[0]), layers),
         'dataSet': Rememberable(inputs, labels),
-        'pause': False,
+        'epoch': 0,
     }
-    res = make_response('Set user Cookie')
-    res.set_cookie('PythonNNSession', user_id, max_age=60 * 60 * 24 * 365 * 2)
-    return res
+
+
+def create_user_cookie(cookie_data):
+    response = make_response('Set user Cookie')
+    response.set_cookie('PythonNNSession', str(cookie_data), max_age=60 * 60 * 24 * 365 * 2)
+    return response
+
+
+@app.route('/set-pause-state', methods=['POST'])
+def set_pause_state():
+    user_cookie = ast.literal_eval(request.cookies.get('PythonNNSession'))
+    new_state = request.data
+
+    user_id = user_cookie['userId']
+    cookie_data = {'userId': user_id, 'pauseState': new_state}
+    updated_cookie = create_user_cookie(cookie_data)
+
+    return updated_cookie
 
 
 @socketio.on('start training')
 def start_training(data):
     print('started')
     layers = data['data']
-    user_id = request.cookies['PythonNNSession']
+    user_cookie = ast.literal_eval(request.cookies['PythonNNSession'])
+    user_id = user_cookie['userId']
     print(f'User ID: {user_id}')
     print(f'Layers: {layers}')
 
-    network = Network(len(inputs[0]), layers)
-    user_networks[user_id]['network'] = network
-    data_set = user_networks[user_id]['dataSet']
+    user = users[user_id]
+    network = users[user_id]['network']
 
     network.num_of_epochs = 50
     network.learning_rate = 0.1
 
-    train_network(network, data_set)
+    network.add_layer(10)
+    train_network(user)
+    network.remove_layer(-1)
 
 
-def train_network(network, data_set):
+def train_network(user):
+    network = user['network']
     for epoch in range(network.num_of_epochs):
         print(f"Epoch {epoch + 1}")
-        for index, (data, label) in data_set:
+        for index, (data, label) in user['dataSet']:
 
             propagate_network(data, label, network)
 
             if index % 10 == 0 or index == 0:
                 network_outputs = network.get_outputs()
 
-                print_network_details(index, label, network, network_outputs)
+                # print_network_details(index, label, network, network_outputs)
                 send_network_data(epoch, label, network_outputs)
+
+            user_cookie = ast.literal_eval(request.cookies.get('PythonNNSession'))
+            pause_state = user_cookie['pauseState']
+            if pause_state == 'pause':
+                break
 
 
 def propagate_network(data, label, network):

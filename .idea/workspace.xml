@@ -4,12 +4,12 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="Refactored network to handle learning rate and epochs better">
+    <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NN/Network Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Network Tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NN/Network.py" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/eventListeners/playPauseButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/static/js/loadNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/loadNetwork.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +95,9 @@
       <module name="PythonNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NN" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -136,6 +139,9 @@
       <module name="PythonNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -186,8 +192,8 @@
       <item itemvalue="Flask server.PythonNN" />
       <item itemvalue="JavaScript Debug.PythonNN Site" />
       <item itemvalue="Python.Network" />
-      <item itemvalue="Python tests.Unittests in Network Tests.py" />
       <item itemvalue="Python.scratch_1" />
+      <item itemvalue="Python tests.Unittests in Network Tests.py" />
     </list>
     <recent_temporary>
       <list>
@@ -253,7 +259,8 @@
       <workItem from="1578517107246" duration="2964000" />
       <workItem from="1578596224510" duration="1287000" />
       <workItem from="1578654176497" duration="10260000" />
-      <workItem from="1579025912384" duration="22405000" />
+      <workItem from="1579025912384" duration="22785000" />
+      <workItem from="1579123697745" duration="9321000" />
     </task>
     <task id="LOCAL-00001" summary="backprop update">
       <created>1570042557354</created>
@@ -388,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579008934381</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Made Rememberable class (need to change name)">
+      <created>1579050543674</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1579050543674</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,7 +455,8 @@
     <MESSAGE value="update cookie methods&#10;add gcloud support" />
     <MESSAGE value="Started on pausing network functionality" />
     <MESSAGE value="Refactored network to handle learning rate and epochs better" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored network to handle learning rate and epochs better" />
+    <MESSAGE value="Made Rememberable class (need to change name)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made Rememberable class (need to change name)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1009" y="522" key="#Deployment" timestamp="1577916035794">
@@ -485,59 +500,59 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="960" y="433" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1577912041562" />
-    <state x="1067" y="427" width="961" height="591" key="#xdebugger.evaluate" timestamp="1578517506252">
+    <state x="1067" y="427" width="961" height="591" key="#xdebugger.evaluate" timestamp="1579133111159">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="1067" y="427" key="#xdebugger.evaluate/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578517506252" />
+    <state x="1067" y="427" key="#xdebugger.evaluate/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579133111159" />
     <state x="404" y="390" width="961" height="591" key="#xdebugger.evaluate/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576245666670" />
-    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2" timestamp="1579050333547">
+    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2" timestamp="1579050542898">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579050333547" />
+    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579050542898" />
     <state x="-1701" y="334" width="1426" height="944" key="CommitChangelistDialog2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854392271" />
     <state x="858" y="565" key="FileChooserDialogImpl" timestamp="1578104045326">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="858" y="565" key="FileChooserDialogImpl/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578104045326" />
-    <state width="2517" height="430" key="GridCell.Tab.0.bottom" timestamp="1579048373360">
+    <state width="2517" height="496" key="GridCell.Tab.0.bottom" timestamp="1579134238929">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2517" height="430" key="GridCell.Tab.0.bottom/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579048373360" />
+    <state width="2517" height="496" key="GridCell.Tab.0.bottom/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579134238929" />
     <state width="2518" height="384" key="GridCell.Tab.0.bottom/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417222" />
-    <state width="2517" height="430" key="GridCell.Tab.0.center" timestamp="1579048373360">
+    <state width="2517" height="496" key="GridCell.Tab.0.center" timestamp="1579134238929">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2517" height="430" key="GridCell.Tab.0.center/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579048373360" />
+    <state width="2517" height="496" key="GridCell.Tab.0.center/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579134238929" />
     <state width="2518" height="384" key="GridCell.Tab.0.center/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417221" />
-    <state width="2517" height="430" key="GridCell.Tab.0.left" timestamp="1579048373360">
+    <state width="2517" height="496" key="GridCell.Tab.0.left" timestamp="1579134238929">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2517" height="430" key="GridCell.Tab.0.left/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579048373360" />
+    <state width="2517" height="496" key="GridCell.Tab.0.left/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579134238929" />
     <state width="2518" height="384" key="GridCell.Tab.0.left/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417220" />
-    <state width="2517" height="430" key="GridCell.Tab.0.right" timestamp="1579048373360">
+    <state width="2517" height="496" key="GridCell.Tab.0.right" timestamp="1579134238929">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2517" height="430" key="GridCell.Tab.0.right/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579048373360" />
+    <state width="2517" height="496" key="GridCell.Tab.0.right/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579134238929" />
     <state width="2518" height="384" key="GridCell.Tab.0.right/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576858417221" />
-    <state width="2517" height="496" key="GridCell.Tab.1.bottom" timestamp="1579045316063">
+    <state width="2517" height="496" key="GridCell.Tab.1.bottom" timestamp="1579134238930">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2517" height="496" key="GridCell.Tab.1.bottom/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579045316063" />
+    <state width="2517" height="496" key="GridCell.Tab.1.bottom/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579134238930" />
     <state width="2518" height="685" key="GridCell.Tab.1.bottom/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199794" />
-    <state width="2517" height="496" key="GridCell.Tab.1.center" timestamp="1579045316063">
+    <state width="2517" height="496" key="GridCell.Tab.1.center" timestamp="1579134238930">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2517" height="496" key="GridCell.Tab.1.center/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579045316063" />
+    <state width="2517" height="496" key="GridCell.Tab.1.center/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579134238930" />
     <state width="2518" height="685" key="GridCell.Tab.1.center/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199793" />
-    <state width="2517" height="496" key="GridCell.Tab.1.left" timestamp="1579045316063">
+    <state width="2517" height="496" key="GridCell.Tab.1.left" timestamp="1579134238929">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2517" height="496" key="GridCell.Tab.1.left/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579045316063" />
+    <state width="2517" height="496" key="GridCell.Tab.1.left/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579134238929" />
     <state width="2518" height="685" key="GridCell.Tab.1.left/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199792" />
-    <state width="2517" height="496" key="GridCell.Tab.1.right" timestamp="1579045316063">
+    <state width="2517" height="496" key="GridCell.Tab.1.right" timestamp="1579134238930">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2517" height="496" key="GridCell.Tab.1.right/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579045316063" />
+    <state width="2517" height="496" key="GridCell.Tab.1.right/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579134238930" />
     <state width="2518" height="685" key="GridCell.Tab.1.right/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576856199793" />
     <state x="-1567" y="454" key="MultipleFileMergeDialog" timestamp="1576854352534">
       <screen x="-2560" y="23" width="2560" height="1417" />
@@ -547,18 +562,19 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="747" y="333" key="SettingsEditor/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578148757782" />
-    <state x="880" y="446" key="Vcs.Push.Dialog.v2" timestamp="1578596968350">
+    <state x="880" y="446" key="Vcs.Push.Dialog.v2" timestamp="1579050545235">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="880" y="446" key="Vcs.Push.Dialog.v2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578596968350" />
+    <state x="880" y="446" key="Vcs.Push.Dialog.v2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579050545235" />
     <state x="-1680" y="471" key="Vcs.Push.Dialog.v2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854395970" />
-    <state x="976" y="529" key="com.intellij.ide.util.TipDialog" timestamp="1578596316600">
+    <state x="976" y="529" key="com.intellij.ide.util.TipDialog" timestamp="1579258584964">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="976" y="529" key="com.intellij.ide.util.TipDialog/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578596316600" />
-    <state x="-1491" y="655" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576854364419">
-      <screen x="-2560" y="23" width="2560" height="1417" />
+    <state x="976" y="529" key="com.intellij.ide.util.TipDialog/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579258584964" />
+    <state x="1069" y="629" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579125536462">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
+    <state x="1069" y="629" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579125536462" />
     <state x="-1491" y="655" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854364419" />
     <state x="908" y="512" key="com.jetbrains.python.documentation.PythonDocumentationEntryEditor" timestamp="1577913300053">
       <screen x="0" y="0" width="2560" height="1410" />
@@ -585,8 +601,8 @@
         </breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/web/app.py</url>
-          <line>125</line>
-          <option name="timeStamp" value="61" />
+          <line>115</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -606,7 +622,7 @@
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_hidden_backprop.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_hidden_backprop Coverage Results" MODIFIED="1577806563658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Network.coverage" NAME="Network Coverage Results" MODIFIED="1577919428866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Flask__web_test_server_py_.coverage" NAME="Flask (web/test_server.py) Coverage Results" MODIFIED="1578475829745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1579048373353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonNN$PythonNN.coverage" NAME="PythonNN Coverage Results" MODIFIED="1579134121350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_update_output_weights.coverage" NAME=" Coverage Results" MODIFIED="1577118619420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_update_hidden_weights.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_update_hidden_weights Coverage Results" MODIFIED="1577753283395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
     <SUITE FILE_PATH="coverage/PythonNN$Unittests_for_Network_Tests_NeuronTesting_test_output_backprop.coverage" NAME="Unittests for Network Tests.NeuronTesting.test_output_backprop Coverage Results" MODIFIED="1578071526364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NN" />
