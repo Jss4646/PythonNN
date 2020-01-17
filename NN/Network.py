@@ -355,8 +355,6 @@ layers = {
 # network.train(1, 0.01)
 
 
-
-
 def output_to_file(name, network):
     with open(name, 'w') as network_file:
         np.set_printoptions(precision=4, linewidth=1000)

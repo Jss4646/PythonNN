@@ -23,6 +23,18 @@ labels = labels.tolist()
 inputs = inputs[0:10]
 labels = labels[0:10]
 
+
+class User:
+    def __init__(self, inputs, layers):
+        self.network = Network(len(inputs[0]), layers)
+        self.data_set = Rememberable(inputs, labels)
+        self.epoch = 0
+        self.play_pause_state = 'firstPlay'
+
+    def switch_play_pause_state(self, new_state):
+        self.play_pause_state = new_state
+
+
 users = {}
 
 
@@ -33,9 +45,9 @@ def home():
 
 @app.route('/setup-user', methods=['POST'])
 def setup_user():
-    user_cookie = request.cookies.get('PythonNNSession')
-    if user_cookie and user_cookie in users:
-        user_network = users[user_cookie]['network']
+    user_id = request.cookies.get('PythonNNSession')
+    if user_id and user_id in users:
+        user_network = users[user_id].network
         network_layers = user_network.get_layers_json()
         return network_layers
     else:
@@ -46,17 +58,12 @@ def add_user():
     user_id = str(uuid.uuid4())
     add_user_to_users(user_id)
 
-    cookie_data = {'userId': user_id, 'pauseState': 'firstPlay'}
-    return create_user_cookie(cookie_data)
+    return create_user_cookie(user_id)
 
 
 def add_user_to_users(user_id):
     layers = request.get_json()
-    users[user_id] = {
-        'network': Network(len(inputs[0]), layers),
-        'dataSet': Rememberable(inputs, labels),
-        'epoch': 0,
-    }
+    users[user_id] = User(inputs, layers)
 
 
 def create_user_cookie(cookie_data):
@@ -67,29 +74,25 @@ def create_user_cookie(cookie_data):
 
 @app.route('/set-pause-state', methods=['POST'])
 def set_pause_state():
-    user_cookie = ast.literal_eval(request.cookies.get('PythonNNSession'))
-    new_state = request.data
-
-    user_id = user_cookie['userId']
-    cookie_data = {'userId': user_id, 'pauseState': new_state}
-    updated_cookie = create_user_cookie(cookie_data)
-
-    return updated_cookie
+    user_id = request.cookies.get('PythonNNSession')
+    new_state = request.data.decode('utf-8')
+    user = users[user_id]
+    user.switch_play_pause_state(new_state)
+    return new_state
 
 
 @socketio.on('start training')
 def start_training(data):
     print('started')
     layers = data['data']
-    user_cookie = ast.literal_eval(request.cookies['PythonNNSession'])
-    user_id = user_cookie['userId']
+    user_id = request.cookies.get('PythonNNSession')
     print(f'User ID: {user_id}')
     print(f'Layers: {layers}')
 
     user = users[user_id]
-    network = users[user_id]['network']
+    network = user.network
 
-    network.num_of_epochs = 50
+    user.epoch = 50
     network.learning_rate = 0.1
 
     network.add_layer(10)
@@ -98,10 +101,11 @@ def start_training(data):
 
 
 def train_network(user):
-    network = user['network']
-    for epoch in range(network.num_of_epochs):
+    network = user.network
+    for epoch in range(user.epoch):
         print(f"Epoch {epoch + 1}")
-        for index, (data, label) in user['dataSet']:
+        user.epoch -= 1
+        for index, (data, label) in user.data_set:
 
             propagate_network(data, label, network)
 
@@ -111,10 +115,9 @@ def train_network(user):
                 # print_network_details(index, label, network, network_outputs)
                 send_network_data(epoch, label, network_outputs)
 
-            user_cookie = ast.literal_eval(request.cookies.get('PythonNNSession'))
-            pause_state = user_cookie['pauseState']
+            pause_state = user.play_pause_state
             if pause_state == 'pause':
-                break
+                return
 
 
 def propagate_network(data, label, network):
