@@ -22,22 +22,32 @@ class PlayPauseButton {
 
             const socket = io.connect(`${window.origin}`);
 
-            if (playPauseButton.state === 'firstPlay') {
-                playPauseButton._startNetwork(socket);
-                playPauseButton.switchState();
-            } else {
-                playPauseButton._updateCookieState();
-                playPauseButton.switchState();
+            switch (playPauseButton.state) {
+                case "firstPlay":
+                    playPauseButton._startNetwork(socket);
+                    playPauseButton.switchState();
+                    break;
+
+                case 'pause':
+                    playPauseButton._updateServerPauseState();
+                    playPauseButton.switchState();
+                    break;
+
+                case 'play':
+                    playPauseButton._updateServerPauseState();
+                    playPauseButton._continueNetworkTraining(socket);
+                    playPauseButton.switchState();
+                    break;
             }
         })
     }
 
     _startNetwork(socket) {
-        this._sendNetworkData(socket);
+        this._startNetworkTraining(socket);
         this._receiveNetworkData(socket);
     }
 
-    _sendNetworkData(socket) {
+    _startNetworkTraining(socket) {
         const networkJSON = network.apiNetwork.layers;
 
         socket.emit('start training', {
@@ -63,7 +73,12 @@ class PlayPauseButton {
         })
     }
 
-    _updateCookieState() {
+    _continueNetworkTraining(socket) {
+        socket.emit('continue training');
+        this._receiveNetworkData(socket);
+    }
+
+    _updateServerPauseState() {
         fetch(`${window.origin}/set-pause-state`, {
             method: "POST",
             credentials: "include",

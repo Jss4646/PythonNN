@@ -100,11 +100,21 @@ def start_training(data):
     network.remove_layer(-1)
 
 
+@socketio.on('continue training')
+def continue_training():
+    user_id = request.cookies.get('PythonNNSession')
+    user = users[user_id]
+    network = user.network
+
+    network.add_layer(10)
+    train_network(user)
+    network.remove_layer(-1)
+
+
 def train_network(user):
     network = user.network
     for epoch in range(user.epoch):
-        print(f"Epoch {epoch + 1}")
-        user.epoch -= 1
+        print(f"Epoch {user.epoch - epoch}")
         for index, (data, label) in user.data_set:
 
             propagate_network(data, label, network)
@@ -113,10 +123,11 @@ def train_network(user):
                 network_outputs = network.get_outputs()
 
                 # print_network_details(index, label, network, network_outputs)
-                send_network_data(epoch, label, network_outputs)
+                send_network_data(user.epoch - epoch - 2, label, network_outputs)
 
             pause_state = user.play_pause_state
             if pause_state == 'pause':
+                user.epoch -= epoch
                 return
 
 
