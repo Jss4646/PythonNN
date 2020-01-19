@@ -4,11 +4,11 @@ from flask import Flask, render_template, request, make_response
 from flask_socketio import SocketIO, emit
 from Network import Network
 from mlxtend.data import loadlocal_mnist
-import ast
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'temp'
 socketio = SocketIO(app)
+
 
 inputs, raw_labels = loadlocal_mnist(
     images_path='NN/mnistDataset/train-images.idx3-ubyte',
@@ -24,12 +24,36 @@ inputs = inputs[0:10]
 labels = labels[0:10]
 
 
+class Rememberable:
+    def __init__(self, source1, source2):
+        self.index = 0
+        self.source1, self.source2 = source1, source2
+        self.source = zip(source1, source2)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index != len(self.source1):
+            item1 = self.source1[self.index]
+            item2 = self.source2[self.index]
+
+            output = (self.index, (item1, item2))
+            self.index += 1
+            return output
+        else:
+            self.index = 0
+            raise StopIteration
+
+
 class User:
     def __init__(self, inputs, layers):
         self.network = Network(len(inputs[0]), layers)
         self.data_set = Rememberable(inputs, labels)
-        self.epoch = 0
+        self.epoch = None
         self.play_pause_state = 'firstPlay'
+        self.layer_index = None
+        self.node_index = None
 
     def switch_play_pause_state(self, new_state):
         self.play_pause_state = new_state
@@ -124,6 +148,7 @@ def train_network(user):
 
                 # print_network_details(index, label, network, network_outputs)
                 send_network_data(user.epoch - epoch - 2, label, network_outputs)
+                send_node_data(network, user)
 
             pause_state = user.play_pause_state
             if pause_state == 'pause':
@@ -161,27 +186,27 @@ def print_network_details(index, label, network, network_outputs):
     print(f"\t\tError {network.calculate_error(label)}\n")
 
 
+@socketio.on('send node data')
+def receive_node_data(data):
+    user_id = request.cookies.get('PythonNNSession')
+    user = users[user_id]
+    network = user.network
+
+    user.layer_index, user.node_index = data['layerIndex'], data['nodeIndex']
+    send_node_data(network, user)
+
+
+def send_node_data(network, user):
+    if user.layer_index:
+        neuron = network.layers[user.layer_index][user.node_index]
+        neuron_data = {
+            'weights': neuron.weights.tolist(),
+            'bias': neuron.bias,
+            'output': neuron.output,
+            'activationType': neuron.activation_function.__name__,
+        }
+        emit('neuron data', neuron_data)
+
+
 if __name__ == '__main__':
-    socketio.run(app)
-
-
-class Rememberable:
-    def __init__(self, source1, source2):
-        self.index = 0
-        self.source1, self.source2 = source1, source2
-        self.source = zip(source1, source2)
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.index != len(self.source1):
-            item1 = self.source1[self.index]
-            item2 = self.source2[self.index]
-
-            output = (self.index, (item1, item2))
-            self.index += 1
-            return output
-        else:
-            self.index = 0
-            raise StopIteration
+    socketio.run(app, port=5001)

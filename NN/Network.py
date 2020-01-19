@@ -96,8 +96,8 @@ class Network:
 
     Parameters
     ----------
-    data_set : list
-        EG: The MNIST dataset
+    input_array_length : int
+
     layers : dict- TODO remove the -
         Tells the network how to setup the layers
         In the form:

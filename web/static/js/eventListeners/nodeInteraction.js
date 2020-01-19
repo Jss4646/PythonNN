@@ -21,7 +21,7 @@ function addHoverInteraction(htmlElement) {
 
 function addNodeClickInteraction(node) {
     addNodeEventlistenerInteraction(node);
-    addNodeInformationInteraction();
+    addNodeInformationInteraction(node);
 }
 
 function addNodeEventlistenerInteraction(node) {
@@ -39,6 +39,42 @@ function addNodeEventlistenerInteraction(node) {
     });
 }
 
-function addNodeInformationInteraction() {
+function addNodeInformationInteraction(node) {
+    node.addEventListener('click', function (event) {
+        const socket = io.connect(`${window.origin}`);
 
+        let node = event.target;
+        let layer = node.parentNode;
+        let network = layer.parentNode;
+
+        let layerList = Array.from(layer.children);
+        let networkList = Array.from(network.children);
+
+        let nodeIndex = layerList.indexOf(node);
+        let layerIndex = networkList.indexOf(layer);
+        let indexs = {
+            'layerIndex': layerIndex,
+            'nodeIndex': nodeIndex,
+        };
+
+        socket.emit('send node data', indexs);
+        socket.on('neuron data', function (data) {
+            let weightsElement = document.querySelector('.weights ol');
+            let weightElementList = Array.from(weightsElement.children);
+
+            let biasElement = document.querySelector('.bias ol');
+
+            let weightsLength = data.weights.length;
+
+            weightElementList.forEach(function(weight) {
+                weight.remove()
+            });
+
+            for (let i = 0; i < weightsLength; i++) {
+                let weightElement = document.createElement('li');
+                weightElement.innerText = data.weights[i];
+                weightsElement.append(weightElement);
+            }
+        })
+    })
 }
