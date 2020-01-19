@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96a01cab-7266-4ad4-9669-f37ebcd9a791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/static/js/eventListeners/nodeInteraction.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/js/eventListeners/nodeInteraction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NN/Network.py" beforeDir="false" afterPath="$PROJECT_DIR$/NN/Network.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,7 +279,7 @@
       <workItem from="1579123697745" duration="9321000" />
       <workItem from="1579258549676" duration="900000" />
       <workItem from="1579358833733" duration="16471000" />
-      <workItem from="1579438950311" duration="5457000" />
+      <workItem from="1579438950311" duration="7492000" />
     </task>
     <task id="LOCAL-00001" summary="backprop update">
       <created>1570042557354</created>
@@ -437,7 +435,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579376876972</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="updates node info">
+      <created>1579473422551</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1579473422551</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -493,7 +498,8 @@
     <MESSAGE value="Made Rememberable class (need to change name)" />
     <MESSAGE value="Work on pause functionality" />
     <MESSAGE value="you can now continue training after pausing the network" />
-    <option name="LAST_COMMIT_MESSAGE" value="you can now continue training after pausing the network" />
+    <MESSAGE value="updates node info" />
+    <option name="LAST_COMMIT_MESSAGE" value="updates node info" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1009" y="522" key="#Deployment" timestamp="1577916035794">
@@ -542,10 +548,10 @@
     </state>
     <state x="1067" y="427" key="#xdebugger.evaluate/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579133111159" />
     <state x="404" y="390" width="961" height="591" key="#xdebugger.evaluate/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576245666670" />
-    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2" timestamp="1579376876045">
+    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2" timestamp="1579473421249">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579376876045" />
+    <state x="654" y="54" width="1426" height="1151" key="CommitChangelistDialog2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579473421249" />
     <state x="-1701" y="334" width="1426" height="944" key="CommitChangelistDialog2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854392271" />
     <state x="858" y="565" key="FileChooserDialogImpl" timestamp="1579441375442">
       <screen x="0" y="0" width="2560" height="1410" />
@@ -599,10 +605,10 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="747" y="333" key="SettingsEditor/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1578148757782" />
-    <state x="880" y="446" key="Vcs.Push.Dialog.v2" timestamp="1579258624419">
+    <state x="880" y="446" key="Vcs.Push.Dialog.v2" timestamp="1579473424250">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="880" y="446" key="Vcs.Push.Dialog.v2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579258624419" />
+    <state x="880" y="446" key="Vcs.Push.Dialog.v2/0.0.2560.1410/2560.-583.1920.1050/2560.497.1920.1050@0.0.2560.1410" timestamp="1579473424250" />
     <state x="-1680" y="471" key="Vcs.Push.Dialog.v2/0.23.1920.1177/-2560.23.2560.1417@-2560.23.2560.1417" timestamp="1576854395970" />
     <state x="976" y="529" key="com.intellij.ide.util.TipDialog" timestamp="1579439424183">
       <screen x="0" y="0" width="2560" height="1410" />

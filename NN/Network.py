@@ -1,7 +1,6 @@
 from typing import List
 
 import numpy as np
-from mlxtend.data import loadlocal_mnist
 
 
 def sigmoid(x, derivative=False) -> float:
@@ -114,14 +113,32 @@ class Network:
     forward_prop
         passes the inputs through the network
 
+    update_layers
+        resets then remakes the network
+
+     get_layers_json
+        returns a json with the layers
+
     back_prop
         generates the errors for each neuron
 
     update_weights
         updates the weights for each neuron
 
+    update_biases
+        updates the bias for each neuron
+
+    add_layer
+        adds a layer to the network
+
+    remove_layer
+        removes a layer
+
     calculate_error
         calculates the error for the output layer
+
+    get_outputs
+        returns a list of outputs
 
     train
         trains the network
@@ -137,6 +154,7 @@ class Network:
         self._initialise_layers(input_array_length, layers)
 
     def _initialise_layers(self, input_array_length, layers):
+        """sets up layers"""
         prev_num_of_neurons = 0
         for index, layer in enumerate(layers.values()):
             activation = layer['activation']
@@ -152,6 +170,7 @@ class Network:
 
     @staticmethod
     def _construct_layer(activation, prev_layer_size, num_of_neurons):
+        """Makes a new layer"""
 
         layer_to_be_added = []
 
@@ -162,10 +181,27 @@ class Network:
         return layer_to_be_added
 
     def update_layers(self, input_array_length: int, new_layers: dict):
+        """
+        Wipes the current layers and replaces it with a new layout
+
+        Parameters
+        ----------
+        input_array_length : int
+
+        new_layers : dict
+            a json in the form of the layers dict from the __init__ function
+        """
         self.layers = []
         self._initialise_layers(input_array_length, new_layers)
 
     def get_layers_json(self):
+        """
+        gets the layers of the network and returns it in json form
+
+        Returns
+        -------
+        layers_json : dict
+        """
         layers_json = {}
         for index, layer in enumerate(self.layers):
             activation = layer[0].activation_function.__name__
@@ -261,23 +297,36 @@ class Network:
     def update_biases(self):
         """
         Updates all the biases in the network
-
-        Parameters
-        ----------
-        learning_rate : float
-            The learning rate for the network
-            See Also: https://en.wikipedia.org/wiki/Learning_rate
         """
         for layer in self.layers:
             for neuron in layer:
                 neuron.bias += self.learning_rate * neuron.error_gradient
 
     def add_layer(self, num_of_neurons, activation_type='sigmoid'):
+        """
+        Adds a layer at the end of the layers array
+
+        Parameters
+        ----------
+        num_of_neurons : int
+            the number of neurons to be added in the layer
+
+        activation_type :
+            the activation type of the neurons in the layer
+        """
         previous_layer_size = len(self.layers[-1])
         new_layer = self._construct_layer(activation_type, previous_layer_size, num_of_neurons)
         self.layers.append(new_layer)
 
     def remove_layer(self, index):
+        """
+        Removes a layer from a given index
+
+        Parameters
+        ----------
+        index : int
+            The index of the layer to be removed
+        """
         del self.layers[index]
 
     def calculate_error(self, labels):
@@ -299,42 +348,17 @@ class Network:
         return self.error
 
     def get_outputs(self):
+        """
+        Gets the outputs of the output layer
+
+        Returns
+        -------
+            outputs : list
+                The outputs of the output layer
+        """
         outputs = [neuron.output for neuron in self.layers[-1]]
         return outputs
 
-    def train(self):
-        for epoch in range(self.num_of_epochs):
-            print(f"Epoch {epoch + 1}")
-            data_index = 0
-            for data, label in zip(self.data_set, self.labels):
-                self.forward_prop(data)
-                self.back_prop(label)
-                self.update_weights(data)
-                self.update_biases()
-
-                if (data_index + 1) % 10 == 0 or data_index == 0:
-                    print(f"\tData {data_index + 1}")
-
-                    print("\t\tOutputs:")
-                    for index, neuron in enumerate(self.layers[-1]):
-                        print(f"\t\t\t{index}: {neuron.output}")
-
-                    network_outputs = [neuron.output for neuron in self.layers[-1]]
-                    print(f'\t\tLabel: {label.index(max(label))}   '
-                          f'Guess: {network_outputs.index(max(network_outputs))}')
-
-                    print(f"\t\tError {self.calculate_error(label)}\n")
-                data_index += 1
-
-#
-# data_set, raw_labels = loadlocal_mnist(
-#     images_path='mnistDataset/train-images.idx3-ubyte',
-#     labels_path='mnistDataset/train-labels.idx1-ubyte'
-# )
-#
-# labels = np.zeros((len(raw_labels), 10))
-# for raw_label, label in zip(raw_labels, labels):
-#     label[raw_label - 1] = 1
 
 layers = {
     'layer 1': {
@@ -350,9 +374,6 @@ layers = {
         'neurons': 10,
     },
 }
-# np.random.seed(0)
-# network = Network(data_set[0:200], labels[0:200], layers)
-# network.train(1, 0.01)
 
 
 def output_to_file(name, network):
