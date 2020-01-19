@@ -64,6 +64,15 @@ function addNodeInformationInteraction(node) {
 
             let biasElement = document.querySelector('.bias ol');
 
+            if (Array.from(biasElement.children).length === 1) {
+                biasElement.children[0].remove()
+            }
+
+            let biasSingleElement = document.createElement('li');
+            biasSingleElement.innerText = data.bias;
+
+            biasElement.append(biasSingleElement);
+
             let weightsLength = data.weights.length;
 
             weightElementList.forEach(function(weight) {
