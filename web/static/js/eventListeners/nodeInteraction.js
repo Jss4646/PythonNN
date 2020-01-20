@@ -41,13 +41,12 @@ function addNodeEventlistenerInteraction(node) {
 
 function addNodeInformationInteraction(node) {
     node.addEventListener('click', function (event) {
-        const socket = io.connect(`${window.origin}`);
-
         let node = event.target;
-        let layer = node.parentNode;
+        let layerNodes = node.parentNode;
+        let layer = layerNodes.parentNode;
         let network = layer.parentNode;
 
-        let layerList = Array.from(layer.children);
+        let layerList = Array.from(layerNodes.children);
         let networkList = Array.from(network.children);
 
         let nodeIndex = layerList.indexOf(node);
@@ -69,7 +68,9 @@ function addNodeInformationInteraction(node) {
             }
 
             let biasSingleElement = document.createElement('li');
-            biasSingleElement.innerText = data.bias;
+            let bias = data.bias;
+            let decimalPoints = 10 ** 5;
+            biasSingleElement.innerText = `${Math.round(bias * decimalPoints) / decimalPoints}`;
 
             biasElement.append(biasSingleElement);
 
@@ -81,7 +82,10 @@ function addNodeInformationInteraction(node) {
 
             for (let i = 0; i < weightsLength; i++) {
                 let weightElement = document.createElement('li');
-                weightElement.innerText = data.weights[i];
+                let weight = data.weights[i];
+                let decimalPoints = 10 ** 5;
+
+                weightElement.innerText = `${Math.round(weight * decimalPoints) / decimalPoints}`;
                 weightsElement.append(weightElement);
             }
         })

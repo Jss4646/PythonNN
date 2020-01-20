@@ -20,8 +20,6 @@ class PlayPauseButton {
 
         this.htmlElement.addEventListener('click', function () {
 
-            const socket = io.connect(`${window.origin}`);
-
             switch (playPauseButton.state) {
                 case "firstPlay":
                     playPauseButton._startNetwork(socket);

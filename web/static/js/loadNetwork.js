@@ -1,4 +1,5 @@
 const networkJSON = network.apiNetwork.layers;
+const socket = io.connect(`${window.origin}`);
 
 fetch(`${window.origin}/setup-user`, {
     method: "POST",

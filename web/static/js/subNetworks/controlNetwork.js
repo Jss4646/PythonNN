@@ -106,7 +106,7 @@ class controlNetwork {
 
         const deleteLayerIcon = document.createElement('img');
         deleteLayerIcon.classList.add('delete-layer');
-        deleteLayerIcon.setAttribute('src', 'https://via.placeholder.com/20');
+        deleteLayerIcon.setAttribute('src', '../static/imgs/delete.png');
         addDeleteLayerInteraction(deleteLayerIcon);
 
         const layerText = document.createElement('span');
@@ -115,7 +115,7 @@ class controlNetwork {
 
         const dropDownIcon = document.createElement('img');
         dropDownIcon.classList.add('drop-down-button');
-        dropDownIcon.setAttribute('src', 'https://via.placeholder.com/20');
+        dropDownIcon.setAttribute('src', '../static/imgs/down-arrow.png');
         addDropdownInteraction(dropDownIcon);
 
         layerBar.appendChild(deleteLayerIcon);
@@ -135,12 +135,12 @@ class controlNetwork {
 
         const removeNode = document.createElement('img');
         removeNode.classList.add('remove-node');
-        removeNode.src = 'https://via.placeholder.com/20';
+        removeNode.src = '../static/imgs/delete.png';
         addDeleteNodeInteraction(removeNode);
 
         const addNode = document.createElement('img');
         addNode.classList.add('add-node');
-        addNode.src = 'https://via.placeholder.com/20';
+        addNode.src = '../static/imgs/add.png';
         addAddNodeFunctionality(addNode);
 
         nodeControls.appendChild(removeNode);

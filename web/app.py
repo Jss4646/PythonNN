@@ -49,6 +49,7 @@ class Rememberable:
 class User:
     def __init__(self, inputs, layers):
         self.network = Network(len(inputs[0]), layers)
+        self.layers = layers
         self.data_set = Rememberable(inputs, labels)
         self.epoch = None
         self.play_pause_state = 'firstPlay'
@@ -71,9 +72,8 @@ def home():
 def setup_user():
     user_id = request.cookies.get('PythonNNSession')
     if user_id and user_id in users:
-        user_network = users[user_id].network
-        network_layers = user_network.get_layers_json()
-        return network_layers
+        user = users[user_id]
+        return user.layers
     else:
         return add_user()
 
@@ -115,6 +115,8 @@ def start_training(data):
 
     user = users[user_id]
     network = user.network
+    network.update_layers(len(inputs[0]), layers)
+    user.layers = layers
 
     user.epoch = 50
     network.learning_rate = 0.1
