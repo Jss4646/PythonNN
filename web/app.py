@@ -8,6 +8,7 @@ from mlxtend.data import loadlocal_mnist
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'temp'
 socketio = SocketIO(app)
+cookie_name = 'PNNUserData'
 
 
 inputs, raw_labels = loadlocal_mnist(
@@ -70,8 +71,8 @@ def home():
 
 @app.route('/setup-user', methods=['POST'])
 def setup_user():
-    user_id = request.cookies.get('PythonNNSession')
-    if user_id and user_id in users:
+    user_id = request.cookies.get(cookie_name)
+    if user_id in users:
         user = users[user_id]
         return user.layers
     else:
@@ -92,13 +93,13 @@ def add_user_to_users(user_id):
 
 def create_user_cookie(cookie_data):
     response = make_response('Set user Cookie')
-    response.set_cookie('PythonNNSession', str(cookie_data), max_age=60 * 60 * 24 * 365 * 2)
+    response.set_cookie(cookie_name, str(cookie_data), max_age=60 * 60 * 24 * 7)
     return response
 
 
 @app.route('/set-pause-state', methods=['POST'])
 def set_pause_state():
-    user_id = request.cookies.get('PythonNNSession')
+    user_id = request.cookies.get(cookie_name)
     new_state = request.data.decode('utf-8')
     user = users[user_id]
     user.switch_play_pause_state(new_state)
@@ -109,7 +110,7 @@ def set_pause_state():
 def start_training(data):
     print('started')
     layers = data['data']
-    user_id = request.cookies.get('PythonNNSession')
+    user_id = request.cookies.get(cookie_name)
     print(f'User ID: {user_id}')
     print(f'Layers: {layers}')
 
@@ -128,7 +129,7 @@ def start_training(data):
 
 @socketio.on('continue training')
 def continue_training():
-    user_id = request.cookies.get('PythonNNSession')
+    user_id = request.cookies.get(cookie_name)
     user = users[user_id]
     network = user.network
 
@@ -190,7 +191,7 @@ def print_network_details(index, label, network, network_outputs):
 
 @socketio.on('send node data')
 def receive_node_data(data):
-    user_id = request.cookies.get('PythonNNSession')
+    user_id = request.cookies.get(cookie_name)
     user = users[user_id]
     network = user.network
 
